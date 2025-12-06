@@ -104,7 +104,9 @@ DATASET_TABLE_MAP = {
 }
 
 # Explicit Mapping of Dataset Key to Source ID (Data.gov.sg)
-# Used for fetching data when the key is not the ID itself
+# Used for fetching data when the registry key (e.g. "hdb_resale_prices") is NOT the Dataset ID.
+# - Collections (e.g. "189") require fetching child datasets + AI Schema Normalization.
+# - Singular Datasets (e.g. "d_...") listed here are "Core" datasets that use a friendly key in the registry.
 DATASET_SOURCE_IDS = {
     "hdb_resale_prices": "189", # Collection
     "hdb_rental_prices": "166", # Collection
