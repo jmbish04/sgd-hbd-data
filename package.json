@@ -15,7 +15,7 @@
     "drizzle:generate": "drizzle-kit generate",
     "migrate:local": "wrangler d1 migrations apply DB --local",
     "migrate:remote": "wrangler d1 migrations apply DB --remote",
-    "build:frontend": "cd frontend && bun run build",
+    "build:frontend": "cd frontend && bun install && bun run build",
     "deploy": "bun run build:frontend && bun run migrate:remote && wrangler deploy"
   },
   "exports": {
