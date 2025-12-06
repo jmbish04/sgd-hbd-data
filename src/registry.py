@@ -103,7 +103,14 @@ DATASET_TABLE_MAP = {
     "d_3e902a9be74243ad68998e66b7dd4970": "raw_sg_park_connector"
 }
 
-
+# Explicit Mapping of Dataset Key to Source ID (Data.gov.sg)
+# Used for fetching data when the key is not the ID itself
+DATASET_SOURCE_IDS = {
+    "hdb_resale_prices": "189", # Collection
+    "hdb_rental_prices": "166", # Collection
+    "hdb_median_rent": "d_23000a00c52996c55106084ed0339566",
+    "hdb_resale_index": "d_14f63e595975691e7c24a27ae4c07c79"
+}
 
 def get_table_name(dataset_id: str) -> str:
     """

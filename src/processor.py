@@ -154,45 +154,33 @@ class DataProcessor:
     async def kickoff_population(self) -> None:
         """Kick off processing for all datasets."""
         from src.clients.datagov import datagov_client
+        from src.registry import DATASET_SOURCE_IDS, COLLECTION_MODE_IDS
         import pandas as pd
         
         logger.info("Starting D1 population for all datasets")
-        
-        # Mapping for Core Collections (Historical Series)
-        COLLECTION_MAPPING = {
-            "hdb_resale_prices": "189",
-            "hdb_rental_prices": "166"
-        }
-        
-        # Mapping for Single Datasets (when Registry key != ID)
-        DATASET_MAPPING = {
-            "hdb_median_rent": "d_23000a00c52996c55106084ed0339566",
-            "hdb_resale_index": "d_14f63e595975691e7c24a27ae4c07c79"
-        }
 
         for dataset_key in self.registry.keys():
             logger.info(f"Processing {dataset_key}...")
             
             dataset_ids = []
+            # Resolve the Source ID (Data.gov.sg ID or Collection ID)
+            # Default to the key itself if not mapped (for d_ keys)
+            source_id = DATASET_SOURCE_IDS.get(dataset_key, dataset_key)
             
-            # 1. Check Collection Mapping
-            if dataset_key in COLLECTION_MAPPING:
-                collection_id = COLLECTION_MAPPING[dataset_key]
-                logger.info(f"Fetching collection {collection_id} for {dataset_key}")
-                ids = await datagov_client.get_collection_datasets(collection_id)
+            # 1. Check if it is a known Collection
+            if source_id in COLLECTION_MODE_IDS:
+                logger.info(f"Fetching collection {source_id} for {dataset_key}")
+                ids = await datagov_client.get_collection_datasets(source_id)
                 if not ids:
-                    logger.warning(f"No datasets found for collection {collection_id}")
+                    logger.warning(f"No datasets found for collection {source_id}")
                 dataset_ids.extend(ids)
             
-            # 2. Check Dataset Mapping
-            elif dataset_key in DATASET_MAPPING:
-                dataset_ids.append(DATASET_MAPPING[dataset_key])
-                
-            # 3. Direct ID (Scaffolded keys)
-            elif dataset_key.startswith("d_"):
-                dataset_ids.append(dataset_key)
+            # 2. Check if it is a Dataset ID
+            elif source_id.startswith("d_"):
+                dataset_ids.append(source_id)
+            
             else:
-                logger.warning(f"Skipping {dataset_key}: No ID mapping found and not a direct ID.")
+                logger.warning(f"Skipping {dataset_key}: ID '{source_id}' format unknown.")
                 continue
             
             logger.info(f"Found {len(dataset_ids)} datasets for {dataset_key}")
