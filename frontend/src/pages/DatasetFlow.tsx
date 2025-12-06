@@ -1,9 +1,5 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import ReactFlow, {
-  Node,
-  Edge,
-  addEdge,
-  Connection,
   useNodesState,
   useEdgesState,
   Controls,
@@ -11,6 +7,8 @@ import ReactFlow, {
   Background,
   ReactFlowProvider,
   Panel,
+  type Node,
+  type Edge,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { Button } from '@/components/ui/button';
@@ -121,6 +119,9 @@ function DatasetFlowContent() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
 
+  // Ref to track polling interval for cleanup
+  const pollIntervalRef = useRef<number | null>(null);
+
   // Load datasets on mount
   useEffect(() => {
     fetch('/api/datasets')
@@ -131,6 +132,16 @@ function DatasetFlowContent() {
         }
       })
       .catch(err => console.error(err));
+  }, []);
+
+  // Cleanup polling interval on unmount
+  useEffect(() => {
+    return () => {
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
+      }
+    };
   }, []);
 
   // Create nodes and edges based on datasets
@@ -222,12 +233,17 @@ function DatasetFlowContent() {
     });
 
     try {
+      // Clear any existing polling interval
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+      }
+
       // Start background processing via API
       const response = await fetch('/api/populate', { method: 'POST' });
       if (!response.ok) throw new Error('Failed to start processing');
 
       // Poll for progress updates
-      const pollInterval = setInterval(async () => {
+      pollIntervalRef.current = setInterval(async () => {
         try {
           const res = await fetch('/api/datasets');
           const data = await res.json();
@@ -249,7 +265,10 @@ function DatasetFlowContent() {
 
             // Stop polling when all datasets are processed
             if (completedCount >= datasetsToProcess.length) {
-              clearInterval(pollInterval);
+              if (pollIntervalRef.current) {
+                clearInterval(pollIntervalRef.current);
+                pollIntervalRef.current = null;
+              }
             }
           }
         } catch (error) {
@@ -259,7 +278,10 @@ function DatasetFlowContent() {
 
       // Stop polling after 10 minutes as safety measure
       setTimeout(() => {
-        clearInterval(pollInterval);
+        if (pollIntervalRef.current) {
+          clearInterval(pollIntervalRef.current);
+          pollIntervalRef.current = null;
+        }
         setProcessingState(prev => ({
           ...prev,
           isRunning: false,
@@ -269,6 +291,13 @@ function DatasetFlowContent() {
 
     } catch (error) {
       console.error('Processing failed:', error);
+
+      // Clear polling interval on error
+      if (pollIntervalRef.current) {
+        clearInterval(pollIntervalRef.current);
+        pollIntervalRef.current = null;
+      }
+
       setProcessingState(prev => ({
         ...prev,
         isRunning: false,
@@ -278,6 +307,12 @@ function DatasetFlowContent() {
   };
 
   const stopProcessing = () => {
+    // Clear polling interval
+    if (pollIntervalRef.current) {
+      clearInterval(pollIntervalRef.current);
+      pollIntervalRef.current = null;
+    }
+
     setProcessingState(prev => ({
       ...prev,
       isRunning: false,

@@ -24,7 +24,6 @@ export default function Catalog() {
     const [processing, setProcessing] = useState<Set<string>>(new Set());
 
     const fetchDatasets = () => {
-        setLoading(true);
         fetch('/api/datasets')
             .then(async res => {
                 if (!res.ok) {
