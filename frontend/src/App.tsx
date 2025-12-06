@@ -5,6 +5,7 @@ import Catalog from './pages/Catalog';
 import DatasetView from './pages/DatasetView';
 import SQLRunner from './pages/SQLRunner';
 import RagChat from './pages/RagChat';
+import HealthPage from './pages/Health';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="catalog/:datasetId" element={<DatasetView />} />
           <Route path="sql" element={<SQLRunner />} />
           <Route path="chat" element={<RagChat />} />
+          <Route path="health" element={<HealthPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
