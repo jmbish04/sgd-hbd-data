@@ -7,6 +7,9 @@ import { HDBEnrichmentService } from './services/enrichment';
 
 // Export the Durable Object class
 export class DataProcessor extends Container {
+  private conn?: WebSocket;
+  private resolveResolve?: (s: string) => void;
+
   constructor(ctx: DurableObjectState<any>, env: Env) {
     super(ctx, env);
     this.defaultPort = parseInt(env.PORT || "8080"); // Dynamic Port
@@ -31,6 +34,105 @@ export class DataProcessor extends Container {
       // Ensure Python output is unbuffered
       PYTHONUNBUFFERED: "1"
     };
+
+    // Initialize websocket connection to container
+    this.initWebsocket();
+  }
+
+  private async blockConcurrencyRetry(cb: () => Promise<unknown>) {
+    await this.ctx.blockConcurrencyWhile(async () => {
+      let lastErr;
+      for (let i = 0; i < 10; i++) {
+        try {
+          return await cb();
+        } catch (err) {
+          lastErr = err;
+          continue;
+        }
+      }
+      throw lastErr;
+    });
+  }
+
+  private async initWebsocket() {
+    await this.blockConcurrencyRetry(async () => {
+      // Use containerFetch to establish websocket connection to container
+      const res = await (this as any).container.getTcpPort(8080).fetch(new Request('http://container/api/health/stream', {
+        headers: { Upgrade: 'websocket' }
+      }));
+
+      if (res.webSocket === null) throw new Error('websocket server is faulty');
+
+      // Accept the websocket and listen to messages
+      res.webSocket.accept();
+      res.webSocket.addEventListener('message', (msg: MessageEvent) => {
+        if (this.resolveResolve !== undefined) {
+          this.resolveResolve(typeof msg.data === 'string' ? msg.data : new TextDecoder().decode(msg.data));
+        }
+      });
+      res.webSocket.addEventListener('close', () => {
+        this.ctx.abort();
+      });
+
+      this.conn = res.webSocket;
+    });
+  }
+
+
+  // Override fetch to handle websocket upgrades
+  override async fetch(request: Request): Promise<Response> {
+    const url = new URL(request.url);
+
+    // Handle websocket upgrade for health streaming
+    if (url.pathname === '/api/health/stream') {
+      const upgradeHeader = request.headers.get('Upgrade');
+      if (upgradeHeader === 'websocket') {
+        const webSocketPair = new WebSocketPair();
+        const [client, server] = Object.values(webSocketPair);
+
+        server.accept();
+
+        // Connect server websocket to container websocket
+        if (this.conn) {
+          // Forward messages from client to container
+          server.addEventListener('message', (event) => {
+            if (this.conn && this.conn.readyState === WebSocket.OPEN) {
+              this.conn.send(event.data);
+            }
+          });
+
+          // Forward messages from container to client
+          this.conn.addEventListener('message', (event) => {
+            if (server.readyState === WebSocket.OPEN) {
+              server.send(event.data);
+            }
+          });
+
+          // Handle websocket close
+          server.addEventListener('close', () => {
+            if (this.conn) {
+              this.conn.close();
+            }
+          });
+
+          // Start the health test by sending a trigger message
+          if (this.conn.readyState === WebSocket.OPEN) {
+            this.conn.send(JSON.stringify({ action: 'START' }));
+          }
+        } else {
+          server.send(JSON.stringify({ type: 'ERROR', error: 'Container websocket not available' }));
+          server.close(1011, 'Internal Error');
+        }
+
+        return new Response(null, {
+          status: 101,
+          webSocket: client,
+        });
+      }
+    }
+
+    // For non-websocket requests, forward to container
+    return await super.fetch(request);
   }
 }
 
@@ -123,43 +225,17 @@ export default {
       return stub.fetch(request);
     }
 
-    // 6. Health Stream (WebSocket) - Runs test and streams results
+    // 6. Health Stream (WebSocket) - Routes to container via Durable Object
     if (url.pathname === '/api/health/stream') {
       const upgradeHeader = request.headers.get('Upgrade');
       if (!upgradeHeader || upgradeHeader !== 'websocket') {
         return new Response('Expected Upgrade: websocket', { status: 426 });
       }
 
-      const webSocketPair = new WebSocketPair();
-      const [client, server] = Object.values(webSocketPair);
-
-      server.accept();
-
-      // Trigger the test stream
-      ctx.waitUntil((async () => {
-        try {
-          const { SystemSelfTestService } = await import('./services/self_test');
-          const tester = new SystemSelfTestService(env);
-
-          await tester.runAllTests('ON_DEMAND', (event) => {
-            if (server.readyState === WebSocket.OPEN) {
-              server.send(JSON.stringify(event));
-            }
-          });
-
-          server.close(1000, "Tests Completed");
-        } catch (e) {
-          if (server.readyState === WebSocket.OPEN) {
-            server.send(JSON.stringify({ type: 'ERROR', error: String(e) }));
-            server.close(1011, "Internal Error");
-          }
-        }
-      })());
-
-      return new Response(null, {
-        status: 101,
-        webSocket: client,
-      });
+      // Route websocket requests to the DataProcessor DO
+      const id = env.DataProcessor.idFromName('main');
+      const stub = env.DataProcessor.get(id);
+      return stub.fetch(request);
     }
 
     // 7. Health History API

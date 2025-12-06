@@ -1,5 +1,5 @@
 # src/main.py
-from fastapi import FastAPI, BackgroundTasks
+from fastapi import FastAPI, BackgroundTasks, WebSocket
 import asyncio
 from typing import List, Dict, Any
 from src.processor import processor
@@ -154,12 +154,65 @@ async def nl_to_sql(payload: Dict[str, str]):
         logger.error(f"NL-to-SQL failed: {e}")
         return {"error": str(e)}
 
+# WebSocket endpoint for health streaming
+@app.websocket("/api/health/stream")
+async def health_stream_websocket(websocket: WebSocket):
+    """WebSocket endpoint that streams health test results."""
+    await websocket.accept()
+
+    try:
+        # Wait for start message
+        start_message = await websocket.receive_json()
+        if start_message.get('action') != 'START':
+            await websocket.send_json({"type": "ERROR", "error": "Expected START action"})
+            return
+
+        # Import the self-test service
+        from src.services.self_test import SystemSelfTestService
+
+        # Create a mock env object - this would need to be passed from the Worker
+        # For now, we'll use a simplified approach
+        class MockEnv:
+            def __init__(self):
+                # These would normally come from the Worker environment
+                pass
+
+        env = MockEnv()
+
+        # Create the tester service
+        tester = SystemSelfTestService(env)
+
+        # Run tests and stream results
+        def progress_callback(event):
+            """Send progress events to the websocket."""
+            try:
+                asyncio.create_task(websocket.send_json(event))
+            except Exception as e:
+                logger.error(f"Failed to send websocket message: {e}")
+
+        await tester.runAllTests('ON_DEMAND', progress_callback)
+
+        # Send completion message
+        await websocket.send_json({"type": "ALL_COMPLETED"})
+
+    except Exception as e:
+        logger.error(f"Health stream websocket error: {e}")
+        try:
+            await websocket.send_json({"type": "ERROR", "error": str(e)})
+        except:
+            pass
+    finally:
+        try:
+            await websocket.close()
+        except:
+            pass
+
 # Include the main API router
 app.include_router(api_router)
 
 # Include subdomain routers (ensure they have prefixes if not already, or mount them under /api if needed)
 # policies.py likely has no prefix or /policies. We should probably mount them under api_router or just app if they have /api prefix.
 # Standard: mount under /api
-app.include_router(policies.router, prefix="/api/policies") 
+app.include_router(policies.router, prefix="/api/policies")
 app.include_router(agent.router, prefix="/api") # agent likely has multiple routes, check path collision
 app.include_router(system.router, prefix="/api") # system is /system/health -> /api/system/health
