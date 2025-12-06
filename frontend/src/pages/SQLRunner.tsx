@@ -23,6 +23,19 @@ export default function SQLRunner() {
                 body: JSON.stringify({ query }),
                 headers: { 'Content-Type': 'application/json' }
             });
+
+            if (!res.ok) {
+                const text = await res.text();
+                try {
+                    // Try to parse as JSON first in case it's a structured error
+                    const jsonErr = JSON.parse(text);
+                    throw new Error(jsonErr.error || text);
+                } catch (e) {
+                    // If not JSON, throw text
+                    throw new Error(text || res.statusText);
+                }
+            }
+
             const json = await res.json();
 
             if (json.error) {

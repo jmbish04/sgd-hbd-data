@@ -26,7 +26,13 @@ export default function Catalog() {
     const fetchDatasets = () => {
         setLoading(true);
         fetch('/api/datasets')
-            .then(res => res.json())
+            .then(async res => {
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || res.statusText);
+                }
+                return res.json();
+            })
             .then(data => {
                 if (data.datasets) {
                     setDatasets(data.datasets);

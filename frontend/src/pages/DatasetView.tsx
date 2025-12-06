@@ -20,6 +20,10 @@ export default function DatasetView() {
             try {
                 // 1. Get the real table name from the registry API
                 const regRes = await fetch('/api/datasets');
+                if (!regRes.ok) {
+                    const text = await regRes.text();
+                    throw new Error(text || regRes.statusText);
+                }
                 const regJson = await regRes.json();
                 
                 const datasetInfo = regJson.datasets?.find((d: any) => d.id === datasetId);
@@ -37,6 +41,11 @@ export default function DatasetView() {
                     body: JSON.stringify({ query })
                 });
                 
+                if (!res.ok) {
+                    const text = await res.text();
+                    throw new Error(text || res.statusText);
+                }
+
                 const json = await res.json();
                 
                 if (json.error) {
