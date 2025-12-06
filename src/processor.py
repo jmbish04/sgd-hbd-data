@@ -98,22 +98,101 @@ class DataProcessor:
         
         return normalized_records
 
-    async def save_to_d1(self, records: List[Any]):
-        """Stub for D1 insertion logic using Drizzle or raw SQL."""
-        # This would use the D1 client to perform batch inserts.
-        pass
+    async def save_to_d1(self, records: List[Any], dataset_key: str):
+        from src.clients.d1 import D1Client
+        from src.registry import get_table_name
+        
+        table_name = get_table_name(dataset_key)
+        if not table_name:
+            logger.error(f"No table name found for {dataset_key}")
+            return
+
+        client = D1Client()
+        
+        if not records: return
+        
+        # Records are Pydantic models
+        dicts = []
+        for r in records:
+            try:
+                # Use field names (CamelCase) to match D1 schema
+                dicts.append(r.model_dump())
+            except AttributeError:
+                # Fallback if dict or Pydantic v1
+                dicts.append(r if isinstance(r, dict) else r.dict())
+
+        if not dicts: return
+
+        columns = list(dicts[0].keys())
+        
+        placeholders = "(" + ", ".join(["?"] * len(columns)) + ")"
+        col_str = ", ".join(columns)
+        
+        sql_template = f"INSERT OR REPLACE INTO {table_name} ({col_str}) VALUES "
+        
+        batch_size = 50
+        logger.info(f"Inserting {len(dicts)} records into {table_name} in batches of {batch_size}")
+        
+        for i in range(0, len(dicts), batch_size):
+            batch = dicts[i:i+batch_size]
+            batch_values = []
+            batch_placeholders = []
+            
+            for row in batch:
+                # Ensure order matches columns
+                row_vals = [row.get(c) for c in columns]
+                batch_values.extend(row_vals)
+                batch_placeholders.append(placeholders)
+            
+            full_sql = sql_template + ", ".join(batch_placeholders)
+            
+            try:
+                await client.execute(full_sql, batch_values)
+            except Exception as e:
+                logger.error(f"Failed to insert batch into {table_name}: {e}")
 
     async def kickoff_population(self) -> None:
-        """Kick off processing for all datasets.
-        This is a placeholder implementation that iterates over the registry and logs the start.
-        In a real system, this would fetch raw data from the Singapore Open Data sources and invoke
-        `process_dataset` for each dataset.
-        """
+        """Kick off processing for all datasets."""
+        from src.clients.datagov import datagov_client
+        import pandas as pd
+        
         logger.info("Starting D1 population for all datasets")
-        for dataset_id in self.registry.keys():
-            # Placeholder: In actual implementation, fetch raw data here.
-            logger.info(f"Processing dataset {dataset_id} (placeholder)")
-            # Example: await self.process_dataset(dataset_id, [])
+        
+        COLLECTION_MAPPING = {
+            "hdb_resale_prices": "189",
+            "hdb_rental_prices": "166"
+        }
+
+        for dataset_key in self.registry.keys():
+            logger.info(f"Processing {dataset_key}...")
+            
+            dataset_ids = []
+            
+            # Check if it's a collection
+            if dataset_key in COLLECTION_MAPPING:
+                collection_id = COLLECTION_MAPPING[dataset_key]
+                ids = await datagov_client.get_collection_datasets(collection_id)
+                dataset_ids.extend(ids)
+            elif dataset_key.startswith("d_"):
+                dataset_ids.append(dataset_key)
+            else:
+                # logger.warning(f"Skipping {dataset_key} (no ID mapping)")
+                continue
+            
+            for ds_id in dataset_ids:
+                df = await datagov_client.download_dataset(ds_id)
+                if df is not None and not df.empty:
+                    # Replace NaN with None
+                    df = df.where(pd.notnull(df), None)
+                    records = df.to_dict(orient='records')
+                    
+                    # Process (Normalize)
+                    normalized = await self.process_dataset(dataset_key, records)
+                    
+                    # Save
+                    if normalized:
+                        await self.save_to_d1(normalized, dataset_key)
+                        
         logger.info("D1 population kickoff completed")
 
 # Initialize Singleton
