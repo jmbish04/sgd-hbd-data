@@ -28,7 +28,7 @@ RUN set -e; \
     tar -xzf - -C /usr/local/bin/
 
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --upgrade pip && pip install --no-cache-dir -r requirements.txt
 
 # Default Port (overridden by Worker)
 ENV PORT=8080
