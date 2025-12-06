@@ -43,6 +43,16 @@ DATASET_CONFIG = {
     },
 
     # ==========================================
+    # Policy RAG System
+    # ==========================================
+    "policy_rag_index": {
+        "module": "policy_rag", # Points to src/datasets/policy_rag.py
+        "table": "policy_embeddings", # Main table for checking activity
+        "source_id": "policy_rag_system",
+        "is_collection": False
+    },
+
+    # ==========================================
     # Standard Datasets (Mapped by Friendly Name)
     # ==========================================
     "hawker_centres_geojson": {
