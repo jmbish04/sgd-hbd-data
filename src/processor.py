@@ -158,9 +158,16 @@ class DataProcessor:
         
         logger.info("Starting D1 population for all datasets")
         
+        # Mapping for Core Collections (Historical Series)
         COLLECTION_MAPPING = {
             "hdb_resale_prices": "189",
             "hdb_rental_prices": "166"
+        }
+        
+        # Mapping for Single Datasets (when Registry key != ID)
+        DATASET_MAPPING = {
+            "hdb_median_rent": "d_23000a00c52996c55106084ed0339566",
+            "hdb_resale_index": "d_14f63e595975691e7c24a27ae4c07c79"
         }
 
         for dataset_key in self.registry.keys():
@@ -168,16 +175,27 @@ class DataProcessor:
             
             dataset_ids = []
             
-            # Check if it's a collection
+            # 1. Check Collection Mapping
             if dataset_key in COLLECTION_MAPPING:
                 collection_id = COLLECTION_MAPPING[dataset_key]
+                logger.info(f"Fetching collection {collection_id} for {dataset_key}")
                 ids = await datagov_client.get_collection_datasets(collection_id)
+                if not ids:
+                    logger.warning(f"No datasets found for collection {collection_id}")
                 dataset_ids.extend(ids)
+            
+            # 2. Check Dataset Mapping
+            elif dataset_key in DATASET_MAPPING:
+                dataset_ids.append(DATASET_MAPPING[dataset_key])
+                
+            # 3. Direct ID (Scaffolded keys)
             elif dataset_key.startswith("d_"):
                 dataset_ids.append(dataset_key)
             else:
-                # logger.warning(f"Skipping {dataset_key} (no ID mapping)")
+                logger.warning(f"Skipping {dataset_key}: No ID mapping found and not a direct ID.")
                 continue
+            
+            logger.info(f"Found {len(dataset_ids)} datasets for {dataset_key}")
             
             for ds_id in dataset_ids:
                 df = await datagov_client.download_dataset(ds_id)
@@ -186,12 +204,21 @@ class DataProcessor:
                     df = df.where(pd.notnull(df), None)
                     records = df.to_dict(orient='records')
                     
-                    # Process (Normalize)
-                    normalized = await self.process_dataset(dataset_key, records)
+                    logger.info(f"Downloaded {len(records)} records for {ds_id}. Normalizing...")
                     
-                    # Save
-                    if normalized:
-                        await self.save_to_d1(normalized, dataset_key)
+                    # Process (Normalize)
+                    try:
+                        normalized = await self.process_dataset(dataset_key, records)
+                        
+                        # Save
+                        if normalized:
+                            await self.save_to_d1(normalized, dataset_key)
+                        else:
+                            logger.warning(f"No valid records produced for {ds_id}")
+                    except Exception as e:
+                        logger.error(f"Processing failed for {ds_id}: {e}")
+                else:
+                    logger.warning(f"Download failed or empty for {ds_id}")
                         
         logger.info("D1 population kickoff completed")
 
