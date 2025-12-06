@@ -69,29 +69,45 @@ async def list_datasets():
                 if table_name in existing_tables:
                     union_parts.append(f"""
                         SELECT 
-                            '{table_name}' as id, 
+                            '{dataset_id}' as id, 
                             COUNT(*) as count, 
                             MAX(ingestedAt) as last_updated 
                         FROM {table_name}
-                        GROUP BY id
                     """)
                 else:
                     metadata[dataset_id]["status"] = "missing_table"
             
-            if union_parts:
-                full_query = " UNION ALL ".join(union_parts) + " ORDER BY id ASC"
-                res_counts = await client.post(f"{worker_url}/api/sql", json={"query": full_query}, timeout=10.0)
-                if res_counts.status_code == 200:
-                    counts_data = res_counts.json()
-                    rows_counts = counts_data.get("results", []) if isinstance(counts_data, dict) else counts_data
-                    if isinstance(rows_counts, list):
-                        for row in rows_counts:
-                            if isinstance(row, dict):
-                                metadata[row['id']] = {
-                                    "count": row['count'], 
-                                    "last_updated": row['last_updated'],
-                                    "status": "active" if (row['count'] or 0) > 0 else "empty"
-                                }
+            # Batch the queries to avoid "too many terms in compound SELECT"
+            # D1/SQLite often limits UNION terms to ~500, but complex queries can hit lower limits.
+            BATCH_SIZE = 5
+            for i in range(0, len(union_parts), BATCH_SIZE):
+                batch = union_parts[i:i + BATCH_SIZE]
+                if not batch: continue
+                
+                full_query = " UNION ALL ".join(batch)
+                try:
+                    res_counts = await client.post(f"{worker_url}/api/sql", json={"query": full_query}, timeout=10.0)
+                    if res_counts.status_code == 200:
+                        counts_data = res_counts.json()
+                        rows_counts = counts_data.get("results", []) if isinstance(counts_data, dict) else counts_data
+                        
+                        # Handle D1 result structure which can be nested
+                        if isinstance(rows_counts, list) and len(rows_counts) > 0 and "results" in rows_counts[0]:
+                             # It's a batch result or D1 response wrapper
+                             rows_counts = rows_counts[0]["results"]
+
+                        if isinstance(rows_counts, list):
+                            for row in rows_counts:
+                                if isinstance(row, dict) and row.get('id'):
+                                    dataset_id = row['id']
+                                    if dataset_id in metadata:
+                                        metadata[dataset_id].update({
+                                            "count": row.get('count', 0), 
+                                            "last_updated": row.get('last_updated'),
+                                            "status": "active" if (row.get('count', 0) > 0) else "empty"
+                                        })
+                except Exception as e:
+                    logger.error(f"Failed to fetch metadata batch {i}: {e}")
     except Exception as e:
         logger.error(f"Failed to fetch metadata: {e}")
         # Return fallback (registry only) without crashing
