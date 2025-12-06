@@ -44,4 +44,8 @@ Deploy to Cloudflare Workers:
 npm run deploy
 ```
 
+
 This builds the frontend, migrates the database, builds the Docker container, and deploys the worker.
+
+### Recent Changes
+- Added `/api/populate` endpoint for manual data ingestion trigger.
