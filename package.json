@@ -11,12 +11,12 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint src --ext .ts,.tsx --config .eslintrc.js",
     "format": "prettier --write \"src/**/*.ts\"",
-    "test": "set -e; for fixture in examples/*/; do if [ -d \"$fixture/test\" ] && [ -f \"$fixture/package.json\" ]; then cd \"$fixture\"; npm install; npm run test; cd - > /dev/null; fi; done",
+    "test": "set -e; for fixture in examples/*/; do if [ -d \"$fixture/test\" ] && [ -f \"$fixture/package.json\" ]; then cd \"$fixture\"; bun install; bun run test; cd - > /dev/null; fi; done",
     "drizzle:generate": "drizzle-kit generate",
     "migrate:local": "wrangler d1 migrations apply DB --local",
     "migrate:remote": "wrangler d1 migrations apply DB --remote",
-    "build:frontend": "cd frontend && npm run build",
-    "deploy": "npm run build:frontend && npm run migrate:remote && wrangler deploy"
+    "build:frontend": "cd frontend && bun run build",
+    "deploy": "bun run build:frontend && bun run migrate:remote && wrangler deploy"
   },
   "exports": {
     ".": {
