@@ -53,10 +53,14 @@ async def list_datasets():
             union_parts = []
             
             # Import helper for robust table name lookup
-            from src.registry import get_table_name
+            from src.registry import get_table_name            
             
             for dataset_id in registry.keys():
                 table_name = get_table_name(dataset_id)
+
+                if dataset_id not in metadata:
+                    metadata[dataset_id] = {}
+                metadata[dataset_id]["tableName"] = table_name
                 
                 if not table_name:
                      # Skip if not mapped (legacy protection)
@@ -100,7 +104,12 @@ async def list_datasets():
     # Merge metadata into response
     response_list = []
     for dataset_id, module_path in registry.items():
-        meta = metadata.get(dataset_id, {"count": 0, "last_updated": None, "status": "error_checking"})
+        meta = metadata.get(dataset_id, {"count": 0, "last_updated": None, "status": "unknown"})
+
+        # Ensure tableName is passed through even if SQL query failed/was skipped
+        if "tableName" not in meta:
+            meta["tableName"] = get_table_name(dataset_id)        
+            
         response_list.append({
             "id": dataset_id,
             "module": module_path,
