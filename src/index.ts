@@ -57,11 +57,16 @@ export class DataProcessor extends Container {
   private async initWebsocket() {
     await this.blockConcurrencyRetry(async () => {
       // Use containerFetch to establish websocket connection to container
-      const res = await (this as any).container.getTcpPort(8080).fetch(new Request('http://container/api/health/stream', {
+      // containerFetch handles ensuring the container is running and healthy
+      const res = await this.containerFetch(new Request('http://container/api/health/stream', {
         headers: { Upgrade: 'websocket' }
       }));
 
-      if (res.webSocket === null) throw new Error('websocket server is faulty');
+      if (res.webSocket === null) {
+        // If we get a 503 or similar because container is starting, throw to retry
+        if (res.status === 503) throw new Error('Container starting');
+        throw new Error('websocket server is faulty');
+      }
 
       // Accept the websocket and listen to messages
       res.webSocket.accept();
