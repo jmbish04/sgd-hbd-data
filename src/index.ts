@@ -80,6 +80,8 @@ export default {
           return new Response('Missing query', { status: 400 });
         }
 
+        console.log(`[SQL] Executing: ${query.substring(0, 200)}${query.length > 200 ? '...' : ''}`);
+
         // Execute raw SQL
         // Note: In production, this should be restricted/authenticated!
         const result = await env.DB.prepare(query).all();
@@ -88,6 +90,7 @@ export default {
           headers: { 'Content-Type': 'application/json' }
         });
       } catch (e) {
+        console.error(`[SQL] Error executing query: ${e}`);
         return new Response(JSON.stringify({ error: String(e) }), {
           status: 500,
           headers: { 'Content-Type': 'application/json' }

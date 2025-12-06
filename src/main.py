@@ -74,16 +74,12 @@ async def list_datasets():
                             MAX(ingestedAt) as last_updated 
                         FROM {table_name}
                         GROUP BY id
-                        ORDER BY
-                            id ASC,
-                            last_updated DESC,
-                            count DESC
                     """)
                 else:
                     metadata[dataset_id]["status"] = "missing_table"
             
             if union_parts:
-                full_query = " UNION ALL ".join(union_parts)
+                full_query = " UNION ALL ".join(union_parts) + " ORDER BY id ASC"
                 res_counts = await client.post(f"{worker_url}/api/sql", json={"query": full_query}, timeout=10.0)
                 if res_counts.status_code == 200:
                     counts_data = res_counts.json()
