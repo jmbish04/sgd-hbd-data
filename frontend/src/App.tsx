@@ -7,8 +7,12 @@ import SQLRunner from './pages/SQLRunner';
 import RagChat from './pages/RagChat';
 import HealthPage from './pages/Health';
 import DatasetFlow from './pages/DatasetFlow';
+import { useDarkMode } from '@/hooks/use-dark-mode';
 
 function App() {
+  // Enable dark mode by default
+  useDarkMode({ defaultValue: true });
+
   return (
     <BrowserRouter>
       <Routes>
