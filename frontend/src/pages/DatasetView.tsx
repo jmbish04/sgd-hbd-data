@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
+import { Loader2 } from 'lucide-react';
 
 export default function DatasetView() {
     const { datasetId } = useParams();
@@ -10,81 +11,75 @@ export default function DatasetView() {
     const [columns, setColumns] = useState<string[]>([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [tableName, setTableName] = useState<string>('');
 
     useEffect(() => {
-        // We don't have a direct "get table name from dataset id" API exposed to frontend easily yet without mapping.
-        // For now, we'll try to guess the table name or use a generic SQL query if we knew the table.
-        // Actually, the user wants to see data.
-        // Let's assume the table name matches the dataset ID with some transformation, or we just query `raw_hdb_resale_prices` as a test if ID matches.
-        // A better way: The Catalog should pass the table name, or we fetch metadata.
-        // For this MVP, let's just run a SQL query that tries to find the table.
-        // Or simpler: Just allow the user to run SQL.
-
-        // Let's try to query a table named after the dataset_id (replacing - with _).
-        const tableName = datasetId?.replace(/-/g, '_');
-
-        // This is a guess. Real implementation needs a mapping.
-        // Let's try to fetch from /api/sql
-
-        const fetchTable = async () => {
+        const loadData = async () => {
+            setLoading(true);
+            setError('');
             try {
-                // First, list tables to find a match?
-                // Or just try SELECT * FROM tableName LIMIT 50
-                // We'll try a few common prefixes if it fails?
-                // Actually, let's just try `raw_{tableName}` which is the convention in `schema.ts` (mostly).
+                // 1. Get the real table name from the registry API
+                const regRes = await fetch('/api/datasets');
+                const regJson = await regRes.json();
+                
+                const datasetInfo = regJson.datasets?.find((d: any) => d.id === datasetId);
+                const realTableName = datasetInfo?.tableName;
 
-                const query = `SELECT * 
-                FROM raw_${tableName} 
-                LIMIT 50`;
+                if (!realTableName) {
+                    throw new Error(`Could not find table name for dataset ${datasetId}`);
+                }
+                setTableName(realTableName);
+
+                // 2. Fetch Data using the real table name
+                const query = `SELECT * FROM ${realTableName} LIMIT 50`;
                 const res = await fetch('/api/sql', {
                     method: 'POST',
                     body: JSON.stringify({ query })
                 });
+                
                 const json = await res.json();
-
+                
                 if (json.error) {
-                    // Try without raw_ prefix
-                    const query2 = `SELECT * 
-                    FROM ${tableName} 
-                    LIMIT 50`;
-
-                    const res2 = await fetch('/api/sql', {
-                        method: 'POST',
-                        body: JSON.stringify({ query: query2 })
-                    });
-                    const json2 = await res2.json();
-                    if (json2.error) throw new Error(json.error + " | " + json2.error);
-
-                    if (json2.results && json2.results.length > 0) {
-                        setData(json2.results);
-                        setColumns(Object.keys(json2.results[0]));
-                    }
-                } else {
-                    if (json.results && json.results.length > 0) {
-                        setData(json.results);
-                        setColumns(Object.keys(json.results[0]));
-                    }
+                    throw new Error(json.error);
                 }
+
+                if (json.results && Array.isArray(json.results) && json.results.length > 0) {
+                    setData(json.results);
+                    setColumns(Object.keys(json.results[0]));
+                } else if (json.results && Array.isArray(json.results)) {
+                    setData([]);
+                } else {
+                    // D1 generic response handling
+                    setData(json || []);
+                }
+
             } catch (e: any) {
+                console.error(e);
                 setError(e.message);
             } finally {
                 setLoading(false);
             }
         };
 
-        fetchTable();
+        if (datasetId) {
+            loadData();
+        }
     }, [datasetId]);
 
     return (
         <div className="flex flex-col gap-6">
             <div className="flex items-center justify-between">
-                <h1 className="text-3xl font-bold tracking-tight">Dataset: {datasetId}</h1>
+                <div>
+                    <h1 className="text-3xl font-bold tracking-tight">Dataset View</h1>
+                    <p className="text-muted-foreground">{datasetId}</p>
+                    {tableName && <p className="text-xs font-mono text-muted-foreground">Table: {tableName}</p>}
+                </div>
                 <Button variant="outline" onClick={() => window.location.reload()}>Refresh</Button>
             </div>
 
             {error && (
-                <div className="p-4 bg-red-50 text-red-500 rounded-md">
-                    Could not load data (Table might not exist or name mismatch): {error}
+                <div className="p-4 bg-red-50 text-red-500 rounded-md border border-red-200">
+                    Error: {error}
                 </div>
             )}
 
@@ -92,17 +87,19 @@ export default function DatasetView() {
                 <CardHeader>
                     <CardTitle>Preview (First 50 Rows)</CardTitle>
                 </CardHeader>
-                <CardContent className="overflow-auto">
+                <CardContent className="overflow-auto min-h-[300px]">
                     {loading ? (
-                        <div>Loading data...</div>
+                        <div className="flex items-center justify-center h-40">
+                            <Loader2 className="h-8 w-8 animate-spin text-muted-foreground" />
+                        </div>
                     ) : data.length === 0 ? (
-                        <div>No data found or table empty.</div>
+                        <div className="text-center text-muted-foreground py-8">No data found in table.</div>
                     ) : (
                         <Table>
                             <TableHeader>
                                 <TableRow>
                                     {columns.map(col => (
-                                        <TableHead key={col} className="whitespace-nowrap">{col}</TableHead>
+                                        <TableHead key={col} className="whitespace-nowrap bg-muted/50">{col}</TableHead>
                                     ))}
                                 </TableRow>
                             </TableHeader>
@@ -110,8 +107,8 @@ export default function DatasetView() {
                                 {data.map((row, i) => (
                                     <TableRow key={i}>
                                         {columns.map(col => (
-                                            <TableCell key={col} className="whitespace-nowrap max-w-[200px] truncate">
-                                                {row[col] !== null ? String(row[col]) : <span className="text-muted-foreground italic">null</span>}
+                                            <TableCell key={col} className="whitespace-nowrap max-w-[300px] truncate">
+                                                {row[col] !== null && row[col] !== undefined ? String(row[col]) : <span className="text-muted-foreground italic">null</span>}
                                             </TableCell>
                                         ))}
                                     </TableRow>
