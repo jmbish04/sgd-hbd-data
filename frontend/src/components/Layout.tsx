@@ -1,5 +1,5 @@
 import { Link, Outlet, useLocation } from 'react-router-dom';
-import { LayoutDashboard, Database, Search } from 'lucide-react';
+import { LayoutDashboard, Database, Search, MessageSquare } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function Layout() {
@@ -8,6 +8,7 @@ export default function Layout() {
     const navItems = [
         { href: '/', label: 'Dashboard', icon: LayoutDashboard },
         { href: '/catalog', label: 'Data Catalog', icon: Database },
+        { href: '/chat', label: 'Policy Chat', icon: MessageSquare },
         { href: '/sql', label: 'SQL Runner', icon: Search },
         // { href: '/health', label: 'System Health', icon: Activity },
     ];
