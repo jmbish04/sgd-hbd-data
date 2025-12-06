@@ -254,7 +254,7 @@ async function checkHealth(env: Env, baseUrl: string): Promise<any> {
     const id = env.DataProcessor.idFromName('main');
     const stub = env.DataProcessor.get(id);
     // Use a dummy request to the DO, which forwards to Python
-    const pyRes = await stub.fetch(new Request(new URL('/health', baseUrl).toString()));
+    const pyRes = await stub.fetch(new Request(new URL('/api/health', baseUrl).toString()));
     if (pyRes.ok) {
       const pyJson = await pyRes.json() as any;
       pythonStatus = pyJson.status || 'active';

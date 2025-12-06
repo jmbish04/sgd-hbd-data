@@ -94,7 +94,7 @@ export class SystemSelfTestService {
     async testPythonContainer(logs: any[]) {
         const id = this.env.DataProcessor.idFromName('main');
         const stub = this.env.DataProcessor.get(id);
-        const res = await stub.fetch('http://container/health');
+        const res = await stub.fetch('http://container/api/health');
 
         if (!res.ok) throw new Error(`Python Health Check Failed: ${res.status}`);
 
