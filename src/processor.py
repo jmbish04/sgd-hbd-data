@@ -19,7 +19,11 @@ logger = setup_logger("DataProcessor")
 
 class DataProcessor:
     def __init__(self):
-        pass
+        self.registry = DATASET_CONFIG
+        self.collection_modes = {
+            k for k, v in DATASET_CONFIG.items() 
+            if v.get("is_collection")
+        }
 
     def get_processor_module(self, dataset_key: str):
         """Dynamic import of the processor module for a given dataset key."""
