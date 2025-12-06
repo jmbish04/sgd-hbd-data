@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singapore HDB Intelligence Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+    <div class="container mx-auto p-8">
+        <header class="mb-12 text-center">
+            <h1 class="text-4xl font-bold text-gray-900">Singapore HDB Intelligence Engine</h1>
+            <p class="text-lg text-gray-600 mt-2">Management & Query Dashboard</p>
+        </header>
+
+        <!-- Control Panel -->
+        <section class="mb-12">
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">Control Panel</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <!-- This section would be dynamically generated -->
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold">HDB Resale Prices</h3>
+                    <p class="text-sm text-gray-500">Rows Ingested: <span class="font-mono">1,203,450</span></p>
+                    <p class="text-sm text-gray-500">Last Updated: <span class="font-mono">2025-12-04</span></p>
+                    <button class="mt-2 w-full bg-blue-500 text-white py-1 rounded hover:bg-blue-600">Trigger Processing</button>
+                </div>
+                <div class="bg-white p-4 rounded-lg shadow">
+                    <h3 class="font-bold">HDB Property Info</h3>
+                    <p class="text-sm text-gray-500">Rows Ingested: <span class="font-mono">98,123</span></p>
+                    <p class="text-sm text-gray-500">Last Updated: <span class="font-mono">2025-12-03</span></p>
+                    <button class="mt-2 w-full bg-blue-500 text-white py-1 rounded hover:bg-blue-600">Trigger Processing</button>
+                </div>
+                <!-- Add more dataset cards here -->
+            </div>
+        </section>
+
+        <!-- AI SQL Runner -->
+        <section>
+            <h2 class="text-2xl font-semibold mb-4 border-b pb-2">AI SQL Runner</h2>
+            <div class="bg-white p-6 rounded-lg shadow">
+                <div class="mb-4">
+                    <label for="natural-query" class="block text-sm font-medium text-gray-700 mb-1">Ask a question in plain English:</label>
+                    <input type="text" id="natural-query" class="w-full p-2 border border-gray-300 rounded-md" placeholder="e.g., Show me 4-room flats in Bedok near Red Swastika School under $600k">
+                </div>
+                <button id="run-query-btn" class="w-full bg-green-500 text-white py-2 rounded-md hover:bg-green-600">Run AI Query</button>
+                
+                <div id="query-output" class="mt-6 hidden">
+                    <h3 class="text-lg font-semibold">Generated SQL:</h3>
+                    <pre class="bg-gray-800 text-white p-4 rounded-md text-sm font-mono my-2"><code id="sql-code"></code></pre>
+                    
+                    <h3 class="text-lg font-semibold mt-4">Results:</h3>
+                    <div id="results-table-container" class="overflow-x-auto">
+                        <table class="min-w-full bg-white border">
+                            <thead id="results-head"></thead>
+                            <tbody id="results-body"></tbody>
+                        </table>
+                    </div>
+                    <p id="no-results" class="text-gray-500 hidden">No results returned.</p>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const runQueryBtn = document.getElementById('run-query-btn');
+            const naturalQueryInput = document.getElementById('natural-query');
+            const queryOutput = document.getElementById('query-output');
+            const sqlCode = document.getElementById('sql-code');
+            const resultsHead = document.getElementById('results-head');
+            const resultsBody = document.getElementById('results-body');
+            const noResults = document.getElementById('no-results');
+            const resultsTableContainer = document.getElementById('results-table-container');
+
+            runQueryBtn.addEventListener('click', async () => {
+                const query = naturalQueryInput.value;
+                if (!query) {
+                    alert('Please enter a query.');
+                    return;
+                }
+
+                try {
+                    const response = await fetch('/api/query', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ query: query }),
+                    });
+
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok.');
+                    }
+
+                    const data = await response.json();
+
+                    // Display SQL
+                    sqlCode.textContent = data.sql_query;
+                    
+                    // Display results
+                    resultsHead.innerHTML = '';
+                    resultsBody.innerHTML = '';
+
+                    if (data.results && data.results.length > 0) {
+                        // Create headers
+                        const headers = Object.keys(data.results[0]);
+                        const headerRow = document.createElement('tr');
+                        headers.forEach(header => {
+                            const th = document.createElement('th');
+                            th.className = 'py-2 px-4 border-b';
+                            th.textContent = header;
+                            headerRow.appendChild(th);
+                        });
+                        resultsHead.appendChild(headerRow);
+
+                        // Create rows
+                        data.results.forEach(row => {
+                            const tr = document.createElement('tr');
+                            headers.forEach(header => {
+                                const td = document.createElement('td');
+                                td.className = 'py-2 px-4 border-b';
+                                td.textContent = row[header];
+                                tr.appendChild(td);
+                            });
+                            resultsBody.appendChild(tr);
+                        });
+                        resultsTableContainer.classList.remove('hidden');
+                        noResults.classList.add('hidden');
+                    } else {
+                        resultsTableContainer.classList.add('hidden');
+                        noResults.classList.remove('hidden');
+                    }
+
+                    queryOutput.classList.remove('hidden');
+
+                } catch (error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while running the query.');
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1764973957102,
+      "tag": "0000_broad_the_renegades",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1764976594764,
+      "tag": "0001_wild_lethal_legion",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1764982990253,
+      "tag": "0002_misty_gwen_stacy",
+      "breakpoints": true
+    }
+  ]
+}

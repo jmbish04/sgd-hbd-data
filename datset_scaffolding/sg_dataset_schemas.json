@@ -1,0 +1,2909 @@
+{
+    "hdb_existing_building": {
+        "datasetId": "d_16b157c52ed637edd6ba1232e026258d",
+        "createdAt": "2023-07-31T16:00:56+08:00",
+        "name": "HDB Existing Building",
+        "collectionIds": [
+            "2033"
+        ],
+        "description": "HDB Existing Buildings.",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-08T10:12:20+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "2025-11-01T00:00:00+08:00",
+        "coverageEnd": "2025-11-30T23:59:59+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 56384282,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "BLK_NO",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ST_COD",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ENTITYID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "POSTAL_COD",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "hdb_existing_building"
+    },
+    "gov_markets_hawker_centres": {
+        "datasetId": "d_bda4baa634dd1cc7a6c7cad5f19e2d68",
+        "createdAt": "2020-11-02T11:13:49+08:00",
+        "name": "Dates of Hawker Centres Closure",
+        "collectionIds": [
+            "1376"
+        ],
+        "description": "Which hawker centres are closed for cleaning? Explore NEA’s official 2025 closure schedule on Singapore’s open data platform, and download the CSV at data.gov.sg.",
+        "format": "CSV",
+        "lastUpdatedAt": "2025-11-12T10:56:14+08:00",
+        "managedBy": "National Environment Agency",
+        "coverageStart": "2025-01-01T00:00:00+08:00",
+        "coverageEnd": "2025-12-31T23:59:59+08:00",
+        "contactEmails": [
+            "lee_khai_jone@nea.gov.sg"
+        ],
+        "datasetSize": 79202,
+        "columnMetadata": {
+            "order": [
+                "c_7f6shm7bgrpwocq9ueaizq19n",
+                "c_9q9lnvrwvm92fd1znz5ijdtm6",
+                "c_1si1e2tc5v67pkyhmvuowisyq",
+                "c_dllx217fz869peemhvd9za0x",
+                "c_as7hpxcahso1t07mjc2lq4zcr",
+                "c_17xjifittangbwbib9kxm0zmn",
+                "c_3h9weh4ng3j5cyzkhl53l2rmi",
+                "c_c8gqmrwdomu5ildj690zi20xb",
+                "c_11ijors3711njpdwoft2nuxn5",
+                "c_cce1fgy8um5532kcqhhdi3svt",
+                "c_di1nc4efqlugcee01191yetgo",
+                "c_cqy3nfoa0hw42alx4a4289uhw",
+                "c_6fallvsxdfnn8hd3hhmlqksgi",
+                "c_dr25grzagbdjal2bq3qpnzc2x",
+                "c_d6r1d861nxqu1tb88ka5a4hb3",
+                "c_371vnpyxeyoqcbuew4juncew",
+                "c_8ztv4d7eoqnplqk8h07fez83n",
+                "c_cn6bjvtgmu5k8vixom08n1oz4",
+                "c_b6owodfoycd8livc36o6nem19",
+                "c_311vk9f5vp4nbnzthcew2pr3d",
+                "c_qesc6c2foc9doffvkti06mmm",
+                "c_kpq9ce0cs54a6ln6nkd0p9fw",
+                "c_9f4ix2dk54sgyjdyi4gn3innz",
+                "c_e4a85lu0t6pqw2ivp0ne2qzh",
+                "c_3hlolvbdpo23nazbacsp1pugx",
+                "c_6wa434ucdhr6sdf04c9tjcmg8",
+                "c_5vfw51vc0hivn20vcim04gz9r"
+            ],
+            "map": {
+                "c_7f6shm7bgrpwocq9ueaizq19n": "serial_no",
+                "c_9q9lnvrwvm92fd1znz5ijdtm6": "name",
+                "c_1si1e2tc5v67pkyhmvuowisyq": "q1_cleaningstartdate",
+                "c_dllx217fz869peemhvd9za0x": "q1_cleaningenddate",
+                "c_as7hpxcahso1t07mjc2lq4zcr": "remarks_q1",
+                "c_17xjifittangbwbib9kxm0zmn": "q2_cleaningstartdate",
+                "c_3h9weh4ng3j5cyzkhl53l2rmi": "q2_cleaningenddate",
+                "c_c8gqmrwdomu5ildj690zi20xb": "remarks_q2",
+                "c_11ijors3711njpdwoft2nuxn5": "q3_cleaningstartdate",
+                "c_cce1fgy8um5532kcqhhdi3svt": "q3_cleaningenddate",
+                "c_di1nc4efqlugcee01191yetgo": "remarks_q3",
+                "c_cqy3nfoa0hw42alx4a4289uhw": "q4_cleaningstartdate",
+                "c_6fallvsxdfnn8hd3hhmlqksgi": "q4_cleaningenddate",
+                "c_dr25grzagbdjal2bq3qpnzc2x": "remarks_q4",
+                "c_d6r1d861nxqu1tb88ka5a4hb3": "other_works_startdate",
+                "c_371vnpyxeyoqcbuew4juncew": "other_works_enddate",
+                "c_8ztv4d7eoqnplqk8h07fez83n": "remarks_other_works",
+                "c_cn6bjvtgmu5k8vixom08n1oz4": "latitude_hc",
+                "c_b6owodfoycd8livc36o6nem19": "longitude_hc",
+                "c_311vk9f5vp4nbnzthcew2pr3d": "photourl",
+                "c_qesc6c2foc9doffvkti06mmm": "address_myenv",
+                "c_kpq9ce0cs54a6ln6nkd0p9fw": "no_of_market_stalls",
+                "c_9f4ix2dk54sgyjdyi4gn3innz": "no_of_food_stalls",
+                "c_e4a85lu0t6pqw2ivp0ne2qzh": "description_myenv",
+                "c_3hlolvbdpo23nazbacsp1pugx": "status",
+                "c_6wa434ucdhr6sdf04c9tjcmg8": "google_3d_view",
+                "c_5vfw51vc0hivn20vcim04gz9r": "google_for_stall"
+            },
+            "metaMapping": {
+                "c_7f6shm7bgrpwocq9ueaizq19n": {
+                    "name": "serial_no",
+                    "columnTitle": "Serial No",
+                    "dataType": "Text",
+                    "index": "0",
+                    "isCategorical": false
+                },
+                "c_9q9lnvrwvm92fd1znz5ijdtm6": {
+                    "name": "name",
+                    "columnTitle": "Name",
+                    "dataType": "Text",
+                    "index": "1",
+                    "isCategorical": false
+                },
+                "c_1si1e2tc5v67pkyhmvuowisyq": {
+                    "name": "q1_cleaningstartdate",
+                    "columnTitle": "Q1 Cleaningstartdate",
+                    "dataType": "Text",
+                    "index": "2",
+                    "isCategorical": true
+                },
+                "c_dllx217fz869peemhvd9za0x": {
+                    "name": "q1_cleaningenddate",
+                    "columnTitle": "Q1 Cleaningenddate",
+                    "dataType": "Text",
+                    "index": "3",
+                    "isCategorical": false
+                },
+                "c_as7hpxcahso1t07mjc2lq4zcr": {
+                    "name": "remarks_q1",
+                    "columnTitle": "Remarks Q1",
+                    "dataType": "Text",
+                    "index": "4",
+                    "isCategorical": true
+                },
+                "c_17xjifittangbwbib9kxm0zmn": {
+                    "name": "q2_cleaningstartdate",
+                    "columnTitle": "Q2 Cleaningstartdate",
+                    "dataType": "Text",
+                    "index": "5",
+                    "isCategorical": true
+                },
+                "c_3h9weh4ng3j5cyzkhl53l2rmi": {
+                    "name": "q2_cleaningenddate",
+                    "columnTitle": "Q2 Cleaningenddate",
+                    "dataType": "Text",
+                    "index": "6",
+                    "isCategorical": false
+                },
+                "c_c8gqmrwdomu5ildj690zi20xb": {
+                    "name": "remarks_q2",
+                    "columnTitle": "Remarks Q2",
+                    "dataType": "Text",
+                    "index": "7",
+                    "isCategorical": true
+                },
+                "c_11ijors3711njpdwoft2nuxn5": {
+                    "name": "q3_cleaningstartdate",
+                    "columnTitle": "Q3 Cleaningstartdate",
+                    "dataType": "Text",
+                    "index": "8",
+                    "isCategorical": true
+                },
+                "c_cce1fgy8um5532kcqhhdi3svt": {
+                    "name": "q3_cleaningenddate",
+                    "columnTitle": "Q3 Cleaningenddate",
+                    "dataType": "Text",
+                    "index": "9",
+                    "isCategorical": false
+                },
+                "c_di1nc4efqlugcee01191yetgo": {
+                    "name": "remarks_q3",
+                    "columnTitle": "Remarks Q3",
+                    "dataType": "Text",
+                    "index": "10",
+                    "isCategorical": true
+                },
+                "c_cqy3nfoa0hw42alx4a4289uhw": {
+                    "name": "q4_cleaningstartdate",
+                    "columnTitle": "Q4 Cleaningstartdate",
+                    "dataType": "Text",
+                    "index": "11",
+                    "isCategorical": true
+                },
+                "c_6fallvsxdfnn8hd3hhmlqksgi": {
+                    "name": "q4_cleaningenddate",
+                    "columnTitle": "Q4 Cleaningenddate",
+                    "dataType": "Text",
+                    "index": "12",
+                    "isCategorical": false
+                },
+                "c_dr25grzagbdjal2bq3qpnzc2x": {
+                    "name": "remarks_q4",
+                    "columnTitle": "Remarks Q4",
+                    "dataType": "Text",
+                    "index": "13",
+                    "isCategorical": true
+                },
+                "c_d6r1d861nxqu1tb88ka5a4hb3": {
+                    "name": "other_works_startdate",
+                    "columnTitle": "Other Works Startdate",
+                    "dataType": "Text",
+                    "index": "14",
+                    "isCategorical": false
+                },
+                "c_371vnpyxeyoqcbuew4juncew": {
+                    "name": "other_works_enddate",
+                    "columnTitle": "Other Works Enddate",
+                    "dataType": "Text",
+                    "index": "15",
+                    "isCategorical": false
+                },
+                "c_8ztv4d7eoqnplqk8h07fez83n": {
+                    "name": "remarks_other_works",
+                    "columnTitle": "Remarks Other Works",
+                    "dataType": "Text",
+                    "index": "16",
+                    "isCategorical": true
+                },
+                "c_cn6bjvtgmu5k8vixom08n1oz4": {
+                    "name": "latitude_hc",
+                    "columnTitle": "Latitude Hc",
+                    "dataType": "Text",
+                    "index": "17",
+                    "isCategorical": false
+                },
+                "c_b6owodfoycd8livc36o6nem19": {
+                    "name": "longitude_hc",
+                    "columnTitle": "Longitude Hc",
+                    "dataType": "Text",
+                    "index": "18",
+                    "isCategorical": false
+                },
+                "c_311vk9f5vp4nbnzthcew2pr3d": {
+                    "name": "photourl",
+                    "columnTitle": "Photourl",
+                    "dataType": "Text",
+                    "index": "19",
+                    "isCategorical": false
+                },
+                "c_qesc6c2foc9doffvkti06mmm": {
+                    "name": "address_myenv",
+                    "columnTitle": "Address Myenv",
+                    "dataType": "Text",
+                    "index": "20",
+                    "isCategorical": false
+                },
+                "c_kpq9ce0cs54a6ln6nkd0p9fw": {
+                    "name": "no_of_market_stalls",
+                    "columnTitle": "No Of Market Stalls",
+                    "dataType": "Text",
+                    "index": "21",
+                    "isCategorical": false
+                },
+                "c_9f4ix2dk54sgyjdyi4gn3innz": {
+                    "name": "no_of_food_stalls",
+                    "columnTitle": "No Of Food Stalls",
+                    "dataType": "Text",
+                    "index": "22",
+                    "isCategorical": false
+                },
+                "c_e4a85lu0t6pqw2ivp0ne2qzh": {
+                    "name": "description_myenv",
+                    "columnTitle": "Description Myenv",
+                    "dataType": "Text",
+                    "index": "23",
+                    "isCategorical": false
+                },
+                "c_3hlolvbdpo23nazbacsp1pugx": {
+                    "name": "status",
+                    "columnTitle": "Status",
+                    "dataType": "Text",
+                    "index": "24",
+                    "isCategorical": true
+                },
+                "c_6wa434ucdhr6sdf04c9tjcmg8": {
+                    "name": "google_3d_view",
+                    "columnTitle": "Google 3d View",
+                    "dataType": "Text",
+                    "index": "25",
+                    "isCategorical": false
+                },
+                "c_5vfw51vc0hivn20vcim04gz9r": {
+                    "name": "google_for_stall",
+                    "columnTitle": "Google For Stall",
+                    "dataType": "Text",
+                    "index": "26",
+                    "isCategorical": true
+                }
+            }
+        },
+        "x_typescript_key": "gov_markets_hawker_centres"
+    },
+    "hawker_centres_geojson": {
+        "datasetId": "d_4a086da0a5553be1d89383cd90d07ecd",
+        "createdAt": "2019-01-16T00:00:00+08:00",
+        "name": "Hawker Centres (GEOJSON)",
+        "collectionIds": [
+            "1445"
+        ],
+        "description": "Location of hawker centres.",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:06:44+08:00",
+        "managedBy": "National Environment Agency",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 140459,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDXADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDYADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSBUILDINGNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSPOSTALCODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSSTREETNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "PHOTOURL",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBLOCKHOUSENUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "STATUS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "AWARDED_DATE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "IMPLEMENTATION_DATE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "INFO_ON_CO_LOCATORS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESS_MYENV",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "EST_ORIGINAL_COMPLETION_DATE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "HUP_COMPLETION_DATE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "NUMBER_OF_COOKED_FOOD_STALLS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "hawker_centres_geojson"
+    },
+    "hdb_resale_prices": {
+        "error": "Status 404",
+        "id": "189",
+        "type": "possible_collection"
+    },
+    "hdb_property_info": {
+        "datasetId": "d_17f5382f26140b1fdae0ba2ef6239d2f",
+        "createdAt": "2018-07-09T15:05:27+08:00",
+        "name": "HDB Property Information",
+        "collectionIds": [
+            "150"
+        ],
+        "description": "Please approach SingPost (www.singpost.com/contact-us/service-enquiry) if you require the postal code information. Do note that there may be charges involved.",
+        "format": "CSV",
+        "lastUpdatedAt": "2025-10-06T09:11:18+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "1937-01-01T08:00:00+08:00",
+        "coverageEnd": "2025-09-30T23:59:59+08:00",
+        "contactEmails": [
+            "lim_hui_ying@hdb.gov.sg",
+            "Jasmine_JM_TAN@hdb.gov.sg",
+            "quek_hong_kuen@hdb.gov.sg"
+        ],
+        "datasetSize": 950579,
+        "columnMetadata": {
+            "order": [
+                "c_f1g5yj98gjkw8z34kz6resot8",
+                "c_vjuc0clr8jl8imu6emuugftc",
+                "c_ejco1ztin8gnvre2sxyj01zgq",
+                "c_ctm0qbnre0p7yz8dqhuxe8834",
+                "c_a55785f9klhq27fsh3kc9karm",
+                "c_60asdqhijmfswue6zh1nj655v",
+                "c_7yhxzcrbogv77wcqjtn0okfro",
+                "c_6ntrvcb5sqxffbnqjk2rce6fi",
+                "c_dvarpyifyht2uoicod107genk",
+                "c_9idym3cpx6gzyzf3fg99gamuq",
+                "c_aw6i485nyecf467nffddfe1gg",
+                "c_2z9stiehf32zxqdn0dtzh93ml",
+                "c_bhupoup5c9j644uirn9ke6dlb",
+                "c_pjmi849ubphng3uliqgxbdc6",
+                "c_f5h3j8jk3dk32igvdfebi01oo",
+                "c_8uidqvfqfr6hoeqlcnvyueg37",
+                "c_8l0cmk89tm0b29uidysh6sw3q",
+                "c_4b4h8nsxcogircpq8cjuk8iw5",
+                "c_bqxcodl2e3e49qu8ukn95ig8n",
+                "c_3grhlqpz6uzo7o9rxtzj1mn6g",
+                "c_3t28y1wfzp3hhpwfhdzdzvx7h",
+                "c_dndl2s65rqbcbuzs1c30cgmb1",
+                "c_9hcankfyh2ypzw8hyqv1jb1xn",
+                "c_e5af5lcaa25xyfin3mbstr5d5"
+            ],
+            "map": {
+                "c_f1g5yj98gjkw8z34kz6resot8": "blk_no",
+                "c_vjuc0clr8jl8imu6emuugftc": "street",
+                "c_ejco1ztin8gnvre2sxyj01zgq": "max_floor_lvl",
+                "c_ctm0qbnre0p7yz8dqhuxe8834": "year_completed",
+                "c_a55785f9klhq27fsh3kc9karm": "residential",
+                "c_60asdqhijmfswue6zh1nj655v": "commercial",
+                "c_7yhxzcrbogv77wcqjtn0okfro": "market_hawker",
+                "c_6ntrvcb5sqxffbnqjk2rce6fi": "miscellaneous",
+                "c_dvarpyifyht2uoicod107genk": "multistorey_carpark",
+                "c_9idym3cpx6gzyzf3fg99gamuq": "precinct_pavilion",
+                "c_aw6i485nyecf467nffddfe1gg": "bldg_contract_town",
+                "c_2z9stiehf32zxqdn0dtzh93ml": "total_dwelling_units",
+                "c_bhupoup5c9j644uirn9ke6dlb": "1room_sold",
+                "c_pjmi849ubphng3uliqgxbdc6": "2room_sold",
+                "c_f5h3j8jk3dk32igvdfebi01oo": "3room_sold",
+                "c_8uidqvfqfr6hoeqlcnvyueg37": "4room_sold",
+                "c_8l0cmk89tm0b29uidysh6sw3q": "5room_sold",
+                "c_4b4h8nsxcogircpq8cjuk8iw5": "exec_sold",
+                "c_bqxcodl2e3e49qu8ukn95ig8n": "multigen_sold",
+                "c_3grhlqpz6uzo7o9rxtzj1mn6g": "studio_apartment_sold",
+                "c_3t28y1wfzp3hhpwfhdzdzvx7h": "1room_rental",
+                "c_dndl2s65rqbcbuzs1c30cgmb1": "2room_rental",
+                "c_9hcankfyh2ypzw8hyqv1jb1xn": "3room_rental",
+                "c_e5af5lcaa25xyfin3mbstr5d5": "other_room_rental"
+            },
+            "metaMapping": {
+                "c_f1g5yj98gjkw8z34kz6resot8": {
+                    "name": "blk_no",
+                    "columnTitle": "Blk No",
+                    "dataType": "Text",
+                    "index": "0",
+                    "isCategorical": false
+                },
+                "c_vjuc0clr8jl8imu6emuugftc": {
+                    "name": "street",
+                    "columnTitle": "Street",
+                    "dataType": "Text",
+                    "index": "1",
+                    "isCategorical": true
+                },
+                "c_ejco1ztin8gnvre2sxyj01zgq": {
+                    "name": "max_floor_lvl",
+                    "columnTitle": "Max Floor Lvl",
+                    "dataType": "Text",
+                    "index": "2",
+                    "isCategorical": true
+                },
+                "c_ctm0qbnre0p7yz8dqhuxe8834": {
+                    "name": "year_completed",
+                    "columnTitle": "Year Completed",
+                    "dataType": "Text",
+                    "index": "3",
+                    "isCategorical": true
+                },
+                "c_a55785f9klhq27fsh3kc9karm": {
+                    "name": "residential",
+                    "columnTitle": "Residential",
+                    "dataType": "Text",
+                    "index": "4",
+                    "isCategorical": true
+                },
+                "c_60asdqhijmfswue6zh1nj655v": {
+                    "name": "commercial",
+                    "columnTitle": "Commercial",
+                    "dataType": "Text",
+                    "index": "5",
+                    "isCategorical": true
+                },
+                "c_7yhxzcrbogv77wcqjtn0okfro": {
+                    "name": "market_hawker",
+                    "columnTitle": "Market Hawker",
+                    "dataType": "Text",
+                    "index": "6",
+                    "isCategorical": true
+                },
+                "c_6ntrvcb5sqxffbnqjk2rce6fi": {
+                    "name": "miscellaneous",
+                    "columnTitle": "Miscellaneous",
+                    "dataType": "Text",
+                    "description": "Examples include admin office, childcare centre, education centre, Residents' Committees centre",
+                    "index": "7",
+                    "isCategorical": true
+                },
+                "c_dvarpyifyht2uoicod107genk": {
+                    "name": "multistorey_carpark",
+                    "columnTitle": "Multistorey Carpark",
+                    "dataType": "Text",
+                    "index": "8",
+                    "isCategorical": true
+                },
+                "c_9idym3cpx6gzyzf3fg99gamuq": {
+                    "name": "precinct_pavilion",
+                    "columnTitle": "Precinct Pavilion",
+                    "dataType": "Text",
+                    "index": "9",
+                    "isCategorical": true
+                },
+                "c_aw6i485nyecf467nffddfe1gg": {
+                    "name": "bldg_contract_town",
+                    "columnTitle": "Bldg Contract Town",
+                    "dataType": "Text",
+                    "description": "Legend: AMK - ANG MO KIO BB - BUKIT BATOK BD - BEDOK BH - BISHAN BM - BUKIT MERAH BP - BUKIT PANJANG BT - BUKIT TIMAH CCK - CHOA CHU KANG CL - CLEMENTI CT - CENTRAL AREA GL - GEYLANG HG - HOUGANG JE - JURONG EAST JW - JURONG WEST KWN - KALLANG/WHAMPOA MP - MARINE PARADE PG - PUNGGOL PRC - PASIR RIS QT - QUEENSTOWN SB - SEMBAWANG SGN - SERANGOON SK - SENGKANG TAP - TAMPINES TG - TENGAH TP - TOA PAYOH WL - WOODLANDS YS - YISHUN",
+                    "index": "10",
+                    "isCategorical": true
+                },
+                "c_2z9stiehf32zxqdn0dtzh93ml": {
+                    "name": "total_dwelling_units",
+                    "columnTitle": "Total Dwelling Units",
+                    "dataType": "Text",
+                    "index": "11",
+                    "isCategorical": true
+                },
+                "c_bhupoup5c9j644uirn9ke6dlb": {
+                    "name": "1room_sold",
+                    "columnTitle": "1room Sold",
+                    "dataType": "Text",
+                    "index": "12",
+                    "isCategorical": true
+                },
+                "c_pjmi849ubphng3uliqgxbdc6": {
+                    "name": "2room_sold",
+                    "columnTitle": "2room Sold",
+                    "dataType": "Text",
+                    "index": "13",
+                    "isCategorical": true
+                },
+                "c_f5h3j8jk3dk32igvdfebi01oo": {
+                    "name": "3room_sold",
+                    "columnTitle": "3room Sold",
+                    "dataType": "Text",
+                    "index": "14",
+                    "isCategorical": true
+                },
+                "c_8uidqvfqfr6hoeqlcnvyueg37": {
+                    "name": "4room_sold",
+                    "columnTitle": "4room Sold",
+                    "dataType": "Text",
+                    "index": "15",
+                    "isCategorical": true
+                },
+                "c_8l0cmk89tm0b29uidysh6sw3q": {
+                    "name": "5room_sold",
+                    "columnTitle": "5room Sold",
+                    "dataType": "Text",
+                    "index": "16",
+                    "isCategorical": true
+                },
+                "c_4b4h8nsxcogircpq8cjuk8iw5": {
+                    "name": "exec_sold",
+                    "columnTitle": "Exec Sold",
+                    "dataType": "Text",
+                    "index": "17",
+                    "isCategorical": true
+                },
+                "c_bqxcodl2e3e49qu8ukn95ig8n": {
+                    "name": "multigen_sold",
+                    "columnTitle": "Multigen Sold",
+                    "dataType": "Text",
+                    "index": "18",
+                    "isCategorical": true
+                },
+                "c_3grhlqpz6uzo7o9rxtzj1mn6g": {
+                    "name": "studio_apartment_sold",
+                    "columnTitle": "Studio Apartment Sold",
+                    "dataType": "Text",
+                    "index": "19",
+                    "isCategorical": true
+                },
+                "c_3t28y1wfzp3hhpwfhdzdzvx7h": {
+                    "name": "1room_rental",
+                    "columnTitle": "1room Rental",
+                    "dataType": "Text",
+                    "index": "20",
+                    "isCategorical": true
+                },
+                "c_dndl2s65rqbcbuzs1c30cgmb1": {
+                    "name": "2room_rental",
+                    "columnTitle": "2room Rental",
+                    "dataType": "Text",
+                    "index": "21",
+                    "isCategorical": true
+                },
+                "c_9hcankfyh2ypzw8hyqv1jb1xn": {
+                    "name": "3room_rental",
+                    "columnTitle": "3room Rental",
+                    "dataType": "Text",
+                    "index": "22",
+                    "isCategorical": true
+                },
+                "c_e5af5lcaa25xyfin3mbstr5d5": {
+                    "name": "other_room_rental",
+                    "columnTitle": "Other Room Rental",
+                    "dataType": "Text",
+                    "index": "23",
+                    "isCategorical": true
+                }
+            }
+        },
+        "x_typescript_key": "hdb_property_info"
+    },
+    "hdb_resale_index": {
+        "datasetId": "d_14f63e595975691e7c24a27ae4c07c79",
+        "createdAt": "2015-07-07T18:22:54+08:00",
+        "name": "HDB Resale Price Index (1Q2009 = 100), Quarterly",
+        "collectionIds": [
+            "152"
+        ],
+        "format": "CSV",
+        "lastUpdatedAt": "2025-10-30T10:25:31+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "1990-01-01T08:00:00+08:00",
+        "coverageEnd": "2025-09-30T08:00:00+08:00",
+        "contactEmails": [
+            "Jasmine_JM_TAN@hdb.gov.sg"
+        ],
+        "datasetSize": 2057,
+        "columnMetadata": {
+            "order": [
+                "c_89fzp21z56xa0gev9x4ohxt9",
+                "c_5lpxfyvqvkvqp91ynvk4hxd0t"
+            ],
+            "map": {
+                "c_89fzp21z56xa0gev9x4ohxt9": "quarter",
+                "c_5lpxfyvqvkvqp91ynvk4hxd0t": "index"
+            },
+            "metaMapping": {
+                "c_89fzp21z56xa0gev9x4ohxt9": {
+                    "name": "quarter",
+                    "columnTitle": "Quarter",
+                    "dataType": "Quarter (Q)",
+                    "index": "0",
+                    "isCategorical": false
+                },
+                "c_5lpxfyvqvkvqp91ynvk4hxd0t": {
+                    "name": "index",
+                    "columnTitle": "Index",
+                    "dataType": "Numeric",
+                    "index": "1",
+                    "isCategorical": false
+                }
+            }
+        },
+        "x_typescript_key": "hdb_resale_index"
+    },
+    "hdb_median_rent": {
+        "datasetId": "d_23000a00c52996c55106084ed0339566",
+        "createdAt": "2015-10-28T10:49:51+08:00",
+        "name": "Median Rent By Town And Flat Type",
+        "collectionIds": [
+            "156"
+        ],
+        "format": "CSV",
+        "lastUpdatedAt": "2025-10-30T10:35:28+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "2005-04-01T08:00:00+08:00",
+        "coverageEnd": "2025-09-30T08:00:00+08:00",
+        "contactEmails": [
+            "quek_hong_kuen@hdb.gov.sg"
+        ],
+        "datasetSize": 360300,
+        "columnMetadata": {
+            "order": [
+                "c_88nrowkg0d3sfepaz0dya9xvh",
+                "c_9lbie66lotkr951g8dd49m2m",
+                "c_4mvrxwv3zf8lcedx4gdbc13uh",
+                "c_7k7nn0kl02kzhjfyiduesqq01"
+            ],
+            "map": {
+                "c_88nrowkg0d3sfepaz0dya9xvh": "quarter",
+                "c_9lbie66lotkr951g8dd49m2m": "town",
+                "c_4mvrxwv3zf8lcedx4gdbc13uh": "flat_type",
+                "c_7k7nn0kl02kzhjfyiduesqq01": "median_rent"
+            },
+            "metaMapping": {
+                "c_88nrowkg0d3sfepaz0dya9xvh": {
+                    "name": "quarter",
+                    "columnTitle": "Quarter",
+                    "dataType": "Quarter (Q)",
+                    "index": "0",
+                    "isCategorical": true
+                },
+                "c_9lbie66lotkr951g8dd49m2m": {
+                    "name": "town",
+                    "columnTitle": "Town",
+                    "dataType": "Text",
+                    "index": "1",
+                    "isCategorical": true
+                },
+                "c_4mvrxwv3zf8lcedx4gdbc13uh": {
+                    "name": "flat_type",
+                    "columnTitle": "Flat Type",
+                    "dataType": "Text",
+                    "index": "2",
+                    "isCategorical": true
+                },
+                "c_7k7nn0kl02kzhjfyiduesqq01": {
+                    "name": "median_rent",
+                    "columnTitle": "Median Rent",
+                    "dataType": "Text",
+                    "index": "3",
+                    "isCategorical": true
+                }
+            }
+        },
+        "x_typescript_key": "hdb_median_rent"
+    },
+    "hdb_rental_prices": {
+        "datasetId": "d_c9f57187485a850908655db0e8cfe651",
+        "createdAt": "2021-10-12T12:09:55+08:00",
+        "name": "Renting Out of Flats from Jan 2021",
+        "collectionIds": [
+            "166"
+        ],
+        "description": "Explore HDB rental statistics and market rates from 2021–2025. Access detailed HDB rental data, indices, and flat prices. Rental data are indicative only (owner‑declared). HDB does not verify the accuracy of the data.",
+        "format": "CSV",
+        "lastUpdatedAt": "2025-11-19T16:11:09+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "2021-01-01T08:00:00+08:00",
+        "coverageEnd": "2025-10-01T08:00:00+08:00",
+        "contactEmails": [
+            "Jasmine_JM_TAN@hdb.gov.sg"
+        ],
+        "datasetSize": 8950190,
+        "columnMetadata": {
+            "order": [
+                "c_dr43vyl3h8afpdpo7myuhhhdd",
+                "c_b2pxtiju2f6u7vjlz0mqcaxfp",
+                "c_9267lfc595eo2r8uzyk1deh43",
+                "c_8l3hduhyftbu6dobgfj1nnpuo",
+                "c_9s7jlj6i7nefc6v6tjz1j84x2",
+                "c_efoo9lez9xkytajyvyusisd4k"
+            ],
+            "map": {
+                "c_dr43vyl3h8afpdpo7myuhhhdd": "rent_approval_date",
+                "c_b2pxtiju2f6u7vjlz0mqcaxfp": "town",
+                "c_9267lfc595eo2r8uzyk1deh43": "block",
+                "c_8l3hduhyftbu6dobgfj1nnpuo": "street_name",
+                "c_9s7jlj6i7nefc6v6tjz1j84x2": "flat_type",
+                "c_efoo9lez9xkytajyvyusisd4k": "monthly_rent"
+            },
+            "metaMapping": {
+                "c_dr43vyl3h8afpdpo7myuhhhdd": {
+                    "name": "rent_approval_date",
+                    "columnTitle": "Rent Approval Date",
+                    "dataType": "Month (YYYY-MM)",
+                    "index": "0",
+                    "isCategorical": true
+                },
+                "c_b2pxtiju2f6u7vjlz0mqcaxfp": {
+                    "name": "town",
+                    "columnTitle": "Town",
+                    "dataType": "Text",
+                    "index": "1",
+                    "isCategorical": true
+                },
+                "c_9267lfc595eo2r8uzyk1deh43": {
+                    "name": "block",
+                    "columnTitle": "Block",
+                    "dataType": "Text",
+                    "index": "2",
+                    "isCategorical": true
+                },
+                "c_8l3hduhyftbu6dobgfj1nnpuo": {
+                    "name": "street_name",
+                    "columnTitle": "Street Name",
+                    "dataType": "Text",
+                    "index": "3",
+                    "isCategorical": true
+                },
+                "c_9s7jlj6i7nefc6v6tjz1j84x2": {
+                    "name": "flat_type",
+                    "columnTitle": "Flat Type",
+                    "dataType": "Text",
+                    "index": "4",
+                    "isCategorical": true
+                },
+                "c_efoo9lez9xkytajyvyusisd4k": {
+                    "name": "monthly_rent",
+                    "columnTitle": "Monthly Rent",
+                    "dataType": "Numeric",
+                    "index": "5",
+                    "isCategorical": true
+                }
+            }
+        },
+        "x_typescript_key": "hdb_rental_prices"
+    },
+    "hdb_demand": {
+        "datasetId": "d_02aa4bb51bc674f3a2d0b9bb6911d934",
+        "createdAt": "2017-02-07T23:52:22+08:00",
+        "name": "Number of Resale Applications Registered by Flat Type",
+        "collectionIds": [
+            "164"
+        ],
+        "description": "Number of Resale Applications Registered by Flat Type, by Quarter",
+        "format": "CSV",
+        "lastUpdatedAt": "2025-07-29T14:22:34+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "2007-01-01T08:00:00+08:00",
+        "coverageEnd": "2025-06-30T08:00:00+08:00",
+        "contactEmails": [
+            "lau_pei_wen@hdb.gov.sg"
+        ],
+        "datasetSize": 9185,
+        "columnMetadata": {
+            "order": [
+                "c_1lwtahrxeoxkf6omflpmisxmf",
+                "c_6s70jyh4672psk50y3oygq5wf",
+                "c_d4etv1bf2761bly3lu3qy3fj7"
+            ],
+            "map": {
+                "c_1lwtahrxeoxkf6omflpmisxmf": "quarter",
+                "c_6s70jyh4672psk50y3oygq5wf": "flat_type",
+                "c_d4etv1bf2761bly3lu3qy3fj7": "no_of_resale_applications"
+            },
+            "metaMapping": {
+                "c_1lwtahrxeoxkf6omflpmisxmf": {
+                    "name": "quarter",
+                    "columnTitle": "Quarter",
+                    "dataType": "Quarter (Q)",
+                    "index": "0",
+                    "isCategorical": true
+                },
+                "c_6s70jyh4672psk50y3oygq5wf": {
+                    "name": "flat_type",
+                    "columnTitle": "Flat type",
+                    "dataType": "Text",
+                    "index": "1",
+                    "isCategorical": true
+                },
+                "c_d4etv1bf2761bly3lu3qy3fj7": {
+                    "name": "no_of_resale_applications",
+                    "columnTitle": "No of resale applications",
+                    "dataType": "Text",
+                    "index": "2",
+                    "isCategorical": false
+                }
+            }
+        },
+        "x_typescript_key": "hdb_demand"
+    },
+    "sg_preschool_centres": {
+        "datasetId": "d_77d7ec97be83d44f61b85454f844382f",
+        "createdAt": "2023-07-31T16:24:27+08:00",
+        "name": "NParks Parks and Nature Reserves",
+        "collectionIds": [
+            "1489"
+        ],
+        "description": "The polygon in this layer represents the indicative Managed Areas of Parks which are currently under the purview of NParks. Includes the reserve boundary of Bukit Timah Nature Reserve, Central Catchment Nature Reserve, Labrador Nature Reserve and Sungei Buloh Wetland Reserve, and other parklands managed by NParks.",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:06:53+08:00",
+        "managedBy": "National Parks Board",
+        "coverageStart": "2025-11-07T00:00:00+08:00",
+        "contactEmails": [
+            "kellie_tan@nparks.gov.sg"
+        ],
+        "datasetSize": 2865278,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID_1",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "L_CODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "N_RESERVE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE_1.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE_1.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_preschool_centres"
+    },
+    "sg_student_care_centres": {
+        "datasetId": "d_9606da8c76387bf74627b3e7797f781d",
+        "createdAt": "2023-07-31T17:12:50+08:00",
+        "name": "Street and Places",
+        "collectionIds": [
+            "1477"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:49:13+08:00",
+        "managedBy": "National Library Board",
+        "contactEmails": [
+            "nlblabs@nlb.gov.sg"
+        ],
+        "datasetSize": 538427,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_student_care_centres"
+    },
+    "sg_school_directory": {
+        "datasetId": "d_9b87bab59d036a60fad2a91530e10773",
+        "createdAt": "2019-12-17T00:00:00+08:00",
+        "name": "SportSG Sport Facilities (GEOJSON)",
+        "collectionIds": [
+            "1631"
+        ],
+        "description": "This layer displays the locations of sport facilities managed by SportSG (excluding Dual Use Scheme sport facilities)",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-13T11:25:36+08:00",
+        "managedBy": "Sport Singapore",
+        "coverageStart": "2025-07-01T00:00:00+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 22526,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "VENUE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBLOCKHOUSENUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSSTREETNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "POSTAL_CODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "DETAILS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_school_directory"
+    },
+    "sg_carpark_hdb": {
+        "datasetId": "d_a57a245b3cf3ec76ad36d55393a16e97",
+        "createdAt": "2023-07-31T16:31:25+08:00",
+        "name": "NEA Market and Food Centre",
+        "collectionIds": [
+            "1389"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:52:27+08:00",
+        "managedBy": "National Environment Agency",
+        "datasetSize": 107601,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_carpark_hdb"
+    },
+    "sg_carpark_ura": {
+        "datasetId": "d_14d807e20158338fd578c2913953516e",
+        "createdAt": "2019-12-11T00:00:00+08:00",
+        "name": "Park Facilities",
+        "collectionIds": [
+            "1495"
+        ],
+        "description": "This dataset contains the representative location of facilities in Parks which are under the purview of the National Parks Board.\r\n",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:06:51+08:00",
+        "managedBy": "National Parks Board",
+        "coverageStart": "2025-11-07T00:00:00+08:00",
+        "contactEmails": [
+            "kellie_tan@nparks.gov.sg"
+        ],
+        "datasetSize": 2250249,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "UNIQUEID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "CLASS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDITIONAL_INFO",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_carpark_ura"
+    },
+    "sg_taxi_stands": {
+        "datasetId": "d_0542d48f0991541706b58059381a6eca",
+        "createdAt": "2023-07-31T16:13:28+08:00",
+        "name": "Parks",
+        "collectionIds": [
+            "1491"
+        ],
+        "description": "The points in this layer represents the indicative Managed Areas of Parks which are under the purview of NParks.",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:06:51+08:00",
+        "managedBy": "National Parks Board",
+        "coverageStart": "2025-11-07T00:00:00+08:00",
+        "contactEmails": [
+            "kellie_tan@nparks.gov.sg"
+        ],
+        "datasetSize": 162657,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "X",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "Y",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_taxi_stands"
+    },
+    "sg_bus_stops": {
+        "datasetId": "d_cac2c32f01960a3ad7202a99c27268a0",
+        "createdAt": "2019-01-24T00:00:00+08:00",
+        "name": "Supermarkets (GEOJSON)",
+        "collectionIds": [
+            "1451"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T15:00:05+08:00",
+        "managedBy": "Singapore Food Agency",
+        "datasetSize": 437568,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_bus_stops"
+    },
+    "sg_mrt_station_exits": {
+        "datasetId": "d_156a38dc024d2b20a6c1d0c0179e797c",
+        "createdAt": "2019-01-21T00:00:00+08:00",
+        "name": "HDB Neighbourhood Renewal Programme Proposed and Under-Construction (NRP) (GEOJSON)",
+        "collectionIds": [
+            "173"
+        ],
+        "description": "This layer displays the proposed HDB Neighbourhood Renewal Programme (NRP) projects and also those NRP projects which are currently under construction.",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-13T11:24:34+08:00",
+        "managedBy": "Housing & Development Board",
+        "coverageStart": "2025-02-01T00:00:00+08:00",
+        "coverageEnd": "2025-02-28T23:59:59+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 369082,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID_1",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LAST_UPDATED",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "STATUS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ESTMT_CNSTRN_CMCMNT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ESTMT_CNSTRN_CMPLTN",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "CNSTRN_CMCMNT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "IMPLMT_ORG",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "QSM_CONTACT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "CTRCTR_NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "CTRCTR_CNTCT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_mrt_station_exits"
+    },
+    "sg_cycling_network": {
+        "datasetId": "d_f0fd1b3643ed8bd34bd403dedd7c1533",
+        "createdAt": "2023-07-31T15:40:08+08:00",
+        "name": "Eldercare Services",
+        "collectionIds": [
+            "714"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T15:07:39+08:00",
+        "managedBy": "Ministry of Health",
+        "datasetSize": 176532,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_cycling_network"
+    },
+    "sg_traffic_incidents": {
+        "datasetId": "d_8d886e3a83934d7447acdf5bc6959999",
+        "createdAt": "2019-12-09T00:00:00+08:00",
+        "name": "Master Plan 2019 Rail Station layer (GEOJSON)",
+        "collectionIds": [
+            "1715"
+        ],
+        "description": "Indicative MRT and LRT station outline layer. This layer is extracted from the Master Plan 2019 that was approved on 18 Nov 2019. For the latest Master Plan, please visit URA web site at https://www.ura.gov.sg/",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:07:04+08:00",
+        "managedBy": "Urban Redevelopment Authority",
+        "coverageStart": "2019-12-09T00:00:00+08:00",
+        "coverageEnd": "2019-12-09T23:59:59+08:00",
+        "datasetSize": 784676,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "GRND_LEVEL",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "RAIL_TYPE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_traffic_incidents"
+    },
+    "sg_traffic_speed_bands": {
+        "datasetId": "d_bae25854ceba2bdffb3cf157aee123d4",
+        "createdAt": "2023-07-31T16:15:27+08:00",
+        "name": "Master Plan 2003 MRT Name",
+        "collectionIds": [
+            "2040"
+        ],
+        "description": "Annotation of name of MRT station",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-04T10:07:13+08:00",
+        "managedBy": "Urban Redevelopment Authority",
+        "coverageStart": "2017-04-12T00:00:00+08:00",
+        "coverageEnd": "2017-04-12T23:59:59+08:00",
+        "datasetSize": 62818,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FEATUREID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ZORDER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ANNOTATIONCLASSID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SYMBOLID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "STATUS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "TEXTSTRING",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "FONTNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FONTSIZE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "BOLD",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ITALIC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "UNDERLINE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "VERTICALALIGNMENT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "HORIZONTALALIGNMENT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "XOFFSET",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "YOFFSET",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ANGLE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FONTLEADING",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "WORDSPACING",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "CHARACTERWIDTH",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "CHARACTERSPACING",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FLIPANGLE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OVERRIDE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_traffic_speed_bands"
+    },
+    "sg_parks": {
+        "datasetId": "d_a72bcd23e208d995f3bd4eececeaca43",
+        "createdAt": "2023-07-31T16:58:32+08:00",
+        "name": "Pre-Schools Location",
+        "collectionIds": [
+            "2064"
+        ],
+        "format": "KML",
+        "lastUpdatedAt": "2024-06-06T14:52:39+08:00",
+        "managedBy": "Early Childhood Development Agency",
+        "datasetSize": 2154851,
+        "x_typescript_key": "sg_parks"
+    },
+    "sg_supermarkets": {
+        "datasetId": "d_abf023b38d9bc451484e3d67b562bc5c",
+        "createdAt": "2023-07-31T16:53:24+08:00",
+        "name": "LTA School Zone",
+        "collectionIds": [
+            "329"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:53:40+08:00",
+        "managedBy": "Land Transport Authority",
+        "contactEmails": [
+            "lta-data_mgmt_office@lta.gov.sg"
+        ],
+        "datasetSize": 216428,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_supermarkets"
+    },
+    "sg_eating_establishments": {
+        "datasetId": "d_1f0313499a17075d13aae6ed3e825bc6",
+        "createdAt": "2023-07-31T15:51:20+08:00",
+        "name": "Eating Establishments",
+        "collectionIds": [
+            "1377"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:26:27+08:00",
+        "managedBy": "Singapore Food Agency",
+        "datasetSize": 37996716,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_eating_establishments"
+    },
+    "sg_sports_facilities": {
+        "datasetId": "d_654e22f14e5bb817423f0e0c9ac4f632",
+        "createdAt": "2023-07-31T16:11:45+08:00",
+        "name": "Hotels",
+        "collectionIds": [
+            "140"
+        ],
+        "description": "Location of Hotels by Hotels Licensing Board,",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-08T10:12:24+08:00",
+        "managedBy": "Hotels Licensing Board",
+        "coverageStart": "2025-07-01T00:00:00+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 223082,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "HYPERLINK",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "POSTALCODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "KEEPERNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "TOTALROOMS",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_sports_facilities"
+    },
+    "sg_community_clubs": {
+        "datasetId": "d_736e30b5a0111242dfde98d7b32cfda2",
+        "createdAt": "2023-07-31T18:16:59+08:00",
+        "name": "Social Service Agencies",
+        "collectionIds": [
+            "2108"
+        ],
+        "description": "Directory of Social Service Agencies (members of NCSS).",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-12T10:07:05+08:00",
+        "managedBy": "Ministry of Social and Family Development",
+        "coverageStart": "2025-10-01T00:00:00+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 699124,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSPOSTALCODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDXADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDYADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBLOCKHOUSENUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSBUILDINGNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSFLOORNUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSSTREETNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSTYPE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "HYPERLINK",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "PHOTOURL",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSUNITNUMBER",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_community_clubs"
+    },
+    "sg_public_libraries": {
+        "datasetId": "d_7fe9a72b1afff18e48111772c8d0fd39",
+        "createdAt": "2023-07-31T16:03:42+08:00",
+        "name": "Kindergartens",
+        "collectionIds": [
+            "2034"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-08T10:12:02+08:00",
+        "managedBy": "Early Childhood Development Agency",
+        "coverageStart": "2021-12-01T00:00:00+08:00",
+        "coverageEnd": "2021-12-31T23:59:59+08:00",
+        "contactEmails": [
+            "feedback@data.gov.sg"
+        ],
+        "datasetSize": 338619,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBLOCKHOUSENUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBUILDINGNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSFLOORNUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSPOSTALCODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSSTREETNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSTYPE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "HYPERLINK",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDXADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDYADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "PHOTOURL",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSUNITNUMBER",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_public_libraries"
+    },
+    "sg_museums": {
+        "datasetId": "d_a751490a138b40eb13c48b0eb90e5c64",
+        "createdAt": "2023-07-31T15:56:58+08:00",
+        "name": "Industrial Government Land Sales - Sites",
+        "collectionIds": [
+            "287"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:52:44+08:00",
+        "managedBy": "JTC Corporation",
+        "datasetSize": 150059,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_museums"
+    },
+    "sg_national_monuments": {
+        "datasetId": "d_b34f9bdbe99067eecb5d5f3be8187cfb",
+        "createdAt": "2023-07-31T18:54:14+08:00",
+        "name": "Child Care Services",
+        "collectionIds": [
+            "2015"
+        ],
+        "format": "KML",
+        "lastUpdatedAt": "2024-06-06T14:55:16+08:00",
+        "managedBy": "Early Childhood Development Agency",
+        "datasetSize": 3511378,
+        "x_typescript_key": "sg_national_monuments"
+    },
+    "sg_chas_clinics": {
+        "datasetId": "d_563451336616abdf5b2c36472c2afd8b",
+        "createdAt": "2019-10-07T00:00:00+08:00",
+        "name": "Private Education Institutions (GEOJSON)",
+        "collectionIds": [
+            "1626"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:37:07+08:00",
+        "managedBy": "SkillsFuture Singapore",
+        "datasetSize": 307027,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_chas_clinics"
+    },
+    "sg_police_establishments": {
+        "datasetId": "d_b494a1190d9968608705f4fdd66a7fbf",
+        "createdAt": "2020-01-06T00:00:00+08:00",
+        "name": "Waste Treatment (GEOJSON)",
+        "collectionIds": [
+            "1454"
+        ],
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2024-06-06T14:55:32+08:00",
+        "managedBy": "National Environment Agency",
+        "datasetSize": 117057,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Name",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "Description",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_police_establishments"
+    },
+    "sg_fire_stations": {
+        "datasetId": "d_487a56abf8c30b50dae3826d3973dfb3",
+        "createdAt": "2019-01-07T00:00:00+08:00",
+        "name": "Constituency Offices (GEOJSON)",
+        "collectionIds": [
+            "1514"
+        ],
+        "description": "to locate Constituency Offices in Singapore",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-11-16T10:06:55+08:00",
+        "managedBy": "People's Association",
+        "coverageStart": "2025-08-13T00:00:00+08:00",
+        "datasetSize": 70737,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBLOCKHOUSENUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSBUILDINGNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSFLOORNUMBER",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSPOSTALCODE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "ADDRESSSTREETNAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSTYPE",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "DESCRIPTION",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "HYPERLINK",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDXADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LANDYADDRESSPOINT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "NAME",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "PHOTOURL",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "ADDRESSUNITNUMBER",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_fire_stations"
+    },
+    "sg_dengue_clusters": {
+        "datasetId": "d_78c9a05019ea8594a657c192bddcd2d6",
+        "createdAt": "2023-08-24T01:08:24+08:00",
+        "name": "Master Plan 2003 Land Use",
+        "collectionIds": [
+            "2054"
+        ],
+        "description": "Indicative polygon of each development land parcel",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:07:27+08:00",
+        "managedBy": "Urban Redevelopment Authority",
+        "coverageStart": "2025-09-17T00:00:00+08:00",
+        "datasetSize": 132953055,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "LU_DESC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "LU_TEXT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "GPR",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "WHITE_Q_MX",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "GPR_B_MIN",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_dengue_clusters"
+    },
+    "sg_rainfall_readings": {
+        "datasetId": "d_90d86daa5bfaa371668b84fa5f01424f",
+        "createdAt": "2023-07-03T14:55:00+08:00",
+        "name": "Master Plan 2019 Land Use layer",
+        "collectionIds": [
+            "1646"
+        ],
+        "description": "Indicative land use polygon layer. This layer is extracted from the Master Plan 2019 that was approved on 18 Nov 2019. For the latest Master Plan, please visit URA web site at https://www.ura.gov.sg/",
+        "format": "GEOJSON",
+        "lastUpdatedAt": "2025-12-05T10:07:19+08:00",
+        "managedBy": "Urban Redevelopment Authority",
+        "coverageStart": "2019-12-09T00:00:00+08:00",
+        "coverageEnd": "2019-12-09T23:59:59+08:00",
+        "datasetSize": 174200577,
+        "geoJsonMetadata": {
+            "properties": [
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "OBJECTID",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "LU_DESC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "LU_TEXT",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "GPR",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "WHI_Q_MX",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "GPR_B_MN",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Text",
+                        "value": "TEXT"
+                    },
+                    "attribute": "INC_CRC",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "FMEL_UPD_D",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.AREA",
+                    "description": ""
+                },
+                {
+                    "dataType": {
+                        "label": "Numeric",
+                        "value": "NUMERIC"
+                    },
+                    "attribute": "SHAPE.LEN",
+                    "description": ""
+                }
+            ]
+        },
+        "x_typescript_key": "sg_rainfall_readings"
+    }
+}

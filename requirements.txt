@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+pandas
+shapely
+scipy
+google-generativeai
+geopandas
+python-dotenv
+pyproj
+python-dateutil
+beautifulsoup4
+httpx
+pydantic-settings

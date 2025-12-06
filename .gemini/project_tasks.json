@@ -1,0 +1,41 @@
+{
+  "project_name": "Singapore HDB Intelligence Engine",
+  "root_dir": "./src",
+  "tasks": [
+    {
+      "id": "1_foundation",
+      "title": "Core Infrastructure Setup",
+      "description": "Initialize the Python package structure. Create `registry.py` to define DatasetIDs from `sg_opendata_collections.py` and `logger.py` for D1-backed logging.",
+      "files_to_create": ["src/__init__.py", "src/registry.py", "src/logger.py"],
+      "status": "pending"
+    },
+    {
+      "id": "2_ai_engine",
+      "title": "AI & DB Models",
+      "description": "Implement `ai_engine.py` with Cloudflare AI Gateway routing. Create `db_models.py` using Pydantic to mirror the `schema.ts` Drizzle definitions.",
+      "files_to_create": ["src/ai_engine.py", "src/db_models.py"],
+      "status": "pending"
+    },
+    {
+      "id": "3_spatial_processor",
+      "title": "The Data Refinery (Spatial Logic)",
+      "description": "Build `processor.py`. Implement 'Phase A' (Normalization) and 'Phase B' (Spatial Analysis). Must use `shapely` for centroids and `scipy.spatial.cKDTree` for calculating `nearestMrtDistance`.",
+      "files_to_create": ["src/processor.py"],
+      "status": "pending"
+    },
+    {
+      "id": "4_dashboard",
+      "title": "FastAPI Dashboard",
+      "description": "Create `main.py` serving a Jinja2 frontend. Implement the 'Natural Language to SQL' endpoint using `ai_engine.py`.",
+      "files_to_create": ["src/main.py", "templates/dashboard.html"],
+      "status": "pending"
+    },
+    {
+      "id": "5_config",
+      "title": "Dependency Management",
+      "description": "Generate `requirements.txt` containing all scientific and web dependencies.",
+      "files_to_create": ["requirements.txt"],
+      "status": "pending"
+    }
+  ]
+}

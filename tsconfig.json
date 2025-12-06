@@ -1,0 +1,45 @@
+{
+  "compilerOptions": {
+    "target": "es2022",
+    "lib": [
+      "ES2022"
+    ],
+    "experimentalDecorators": true,
+    "module": "ES2022",
+    "moduleResolution": "bundler",
+    "sourceMap": true,
+    "types": [
+      "node",
+      "@cloudflare/workers-types"
+    ],
+    "moduleDetection": "force",
+    "allowJs": true,
+    "outDir": "dist",
+    "declaration": true, // Generate .d.ts files
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "isolatedModules": true,
+    "allowSyntheticDefaultImports": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noImplicitThis": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noImplicitOverride": true
+  },
+  "include": [
+    "src/lib/*.ts",
+    "src/index.ts",
+    "src/types/*.ts",
+    "worker-configuration.d.ts",
+    "src/*.d.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "**/*.test.ts"
+  ]
+}

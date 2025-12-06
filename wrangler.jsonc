@@ -1,0 +1,110 @@
+/**
+ * For more details on how to configure Wrangler, refer to:
+ * https://developers.cloudflare.com/workers/wrangler/configuration/
+ */
+{
+	"$schema": "./node_modules/wrangler/config-schema.json",
+	"name": "sgd-hbd-data",
+	"main": "src/index.ts",
+	"compatibility_date": "2025-10-08",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"observability": {
+		"enabled": true
+	},
+	/**
+	 * Smart Placement
+	 * Docs: https://developers.cloudflare.com/workers/configuration/smart-placement/#smart-placement
+	 */
+	// "placement": { "mode": "smart" }
+	/**
+	 * Bindings
+	 * Bindings allow your Worker to interact with resources on the Cloudflare Developer Platform, including
+	 * databases, object storage, AI inference, real-time communication and more.
+	 * https://developers.cloudflare.com/workers/runtime-apis/bindings/
+	 */
+	/**
+	 * Environment Variables
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#environment-variables
+	 * 
+	 * R2 CONNECTION KEYS AND ACCOUNT ID ARE ADDED AS SECRETS ALREADY VIA `wrangler secret bulk .env`
+	 */
+	"vars": {
+		"WORKER_LOG_URL": "https://sgd-hbd-data.hacolby.workers.dev/_internal/log",
+		"PORT": "8080"
+	},
+	/**
+	 * Note: Use secrets to store sensitive data.
+	 * https://developers.cloudflare.com/workers/configuration/secrets/
+	 */
+	/**
+	 * Static Assets
+	 * https://developers.cloudflare.com/workers/static-assets/binding/
+	 */
+	"assets": {
+		"directory": "./frontend/dist",
+		"binding": "ASSETS",
+		"not_found_handling": "single-page-application"
+	},
+	"triggers": {
+		"crons": [
+			"0 0 * * SUN" // Weekly at midnight on Sunday
+		]
+	},
+	/**
+	 * Service Bindings (communicate between multiple Workers)
+	 * https://developers.cloudflare.com/workers/wrangler/configuration/#service-bindings
+	 */
+	// "services": [{ "binding": "MY_SERVICE", "service": "my-service" }]
+	"containers": [
+		{
+			"class_name": "DataProcessor",
+			"image": "./Dockerfile",
+			"max_instances": 1
+		}
+	],
+	"durable_objects": {
+		"bindings": [
+			{
+				"class_name": "DataProcessor",
+				"name": "DataProcessor"
+			}
+		]
+	},
+	"migrations": [
+		{
+			"new_sqlite_classes": [
+				"DataProcessor"
+			],
+			"tag": "v1"
+		}
+	],
+	"upload_source_maps": true,
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "sgd-hbd-data",
+			"database_id": "e3195b2a-8429-482c-8c4d-cb2f28a17835"
+		}
+	],
+	"r2_buckets": [
+		{
+			"bucket_name": "sgd-hbd-data",
+			"binding": "BUCKET",
+			"remote": true
+		}
+	],
+	//wrangler vectorize create sgd-hbd-policy --preset @cf/baai/bge-large-en-v1.5
+	"vectorize": [
+		{
+			"binding": "VECTORIZE",
+			"index_name": "sgd-hbd-policy",
+			"remote": true
+		}
+	],
+	"ai": {
+		"binding": "AI",
+		"remote": true
+	}
+}
