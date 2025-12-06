@@ -65,7 +65,15 @@ export class DataProcessor extends Container {
       if (res.webSocket === null) {
         // If we get a 503 or similar because container is starting, throw to retry
         if (res.status === 503) throw new Error('Container starting');
-        throw new Error('websocket server is faulty');
+        
+        // Log the response text to understand why connection failed
+        try {
+          const text = await res.text();
+          console.error(`WebSocket connection failed with status ${res.status}: ${text}`);
+          throw new Error(`websocket server is faulty: ${res.status} - ${text.substring(0, 100)}`);
+        } catch (e) {
+          throw new Error(`websocket server is faulty: ${res.status}`);
+        }
       }
 
       // Accept the websocket and listen to messages
