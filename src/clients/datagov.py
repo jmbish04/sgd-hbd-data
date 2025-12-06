@@ -30,6 +30,21 @@ class DataGovClient:
                 logger.error(f"Failed to fetch collection {collection_id}: {e}")
                 return []
 
+    async def get_dataset_metadata(self, dataset_id: str) -> Dict[str, Any]:
+        """
+        Fetches metadata for a dataset (v2 API).
+        """
+        url = f"https://api-production.data.gov.sg/v2/public/api/datasets/{dataset_id}/metadata"
+        async with httpx.AsyncClient() as client:
+            try:
+                resp = await client.get(url)
+                if resp.status_code == 200:
+                    return resp.json().get('data', {})
+                return {}
+            except Exception as e:
+                logger.error(f"Failed to fetch metadata for {dataset_id}: {e}")
+                return {}
+
     async def download_dataset(self, dataset_id: str) -> Optional[pd.DataFrame]:
         """
         Downloads the full dataset CSV using the initiate -> poll -> download pattern.

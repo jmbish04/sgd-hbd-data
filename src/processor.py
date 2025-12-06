@@ -151,6 +151,61 @@ class DataProcessor:
             except Exception as e:
                 logger.error(f"Failed to insert batch into {table_name}: {e}")
 
+    async def normalize_collection_schema(self, dataset_key: str, dataset_ids: List[str]) -> Dict[str, Dict[str, str]]:
+        """
+        For a collection of datasets, use AI to map each dataset's columns to the target D1 schema.
+        Returns a dict: { dataset_id: { original_col: target_col } }
+        """
+        from src.ai_engine import AIEngine
+        from src.registry import get_table_name
+        from src.clients.datagov import datagov_client
+        import src.db_models as db_models
+        
+        # 1. Resolve Target Model
+        table_name = get_table_name(dataset_key)
+        if not table_name:
+            logger.error(f"No table name for {dataset_key}")
+            return {}
+            
+        # Convert table name (e.g. rawHdbResalePrices) to Model Class (RawHdbResalePrices)
+        model_name = table_name[0].upper() + table_name[1:]
+        target_model = getattr(db_models, model_name, None)
+        
+        if not target_model:
+            logger.error(f"No Pydantic model found for {table_name} ({model_name})")
+            return {}
+            
+        ai = AIEngine()
+        mappings = {}
+        
+        for ds_id in dataset_ids:
+            # Fetch metadata to get columns
+            meta = await datagov_client.get_dataset_metadata(ds_id)
+            if not meta:
+                logger.warning(f"Could not fetch metadata for {ds_id}, skipping normalization mapping.")
+                continue
+            
+            col_meta = meta.get('columnMetadata', {})
+            raw_columns = []
+            if 'map' in col_meta:
+                raw_columns = list(col_meta['map'].values())
+            
+            if not raw_columns:
+                logger.warning(f"No columns found in metadata for {ds_id}")
+                continue
+                
+            try:
+                logger.info(f"Mapping columns for {ds_id} to {model_name} using AI...")
+                result = ai.map_columns_to_schema(raw_columns, target_model, ds_id)
+                
+                valid_map = {k: v for k, v in result.mapping.items() if v}
+                mappings[ds_id] = valid_map
+                
+            except Exception as e:
+                logger.error(f"AI Mapping failed for {ds_id}: {e}")
+                
+        return mappings
+
     async def kickoff_population(self) -> None:
         """Kick off processing for all datasets."""
         from src.clients.datagov import datagov_client
@@ -164,11 +219,12 @@ class DataProcessor:
             
             dataset_ids = []
             # Resolve the Source ID (Data.gov.sg ID or Collection ID)
-            # Default to the key itself if not mapped (for d_ keys)
             source_id = DATASET_SOURCE_IDS.get(dataset_key, dataset_key)
             
             # 1. Check if it is a known Collection
+            is_collection = False
             if source_id in COLLECTION_MODE_IDS:
+                is_collection = True
                 logger.info(f"Fetching collection {source_id} for {dataset_key}")
                 ids = await datagov_client.get_collection_datasets(source_id)
                 if not ids:
@@ -185,9 +241,22 @@ class DataProcessor:
             
             logger.info(f"Found {len(dataset_ids)} datasets for {dataset_key}")
             
+            # AI Schema Normalization for Collections
+            column_mappings = {}
+            if is_collection and dataset_ids:
+                column_mappings = await self.normalize_collection_schema(dataset_key, dataset_ids)
+            
             for ds_id in dataset_ids:
                 df = await datagov_client.download_dataset(ds_id)
                 if df is not None and not df.empty:
+                    # Apply AI Schema Mapping
+                    if ds_id in column_mappings:
+                        mapping = column_mappings[ds_id]
+                        actual_map = {k: v for k, v in mapping.items() if k in df.columns}
+                        if actual_map:
+                            logger.info(f"Renaming {len(actual_map)} columns for {ds_id} based on AI mapping")
+                            df.rename(columns=actual_map, inplace=True)
+
                     # Replace NaN with None
                     df = df.where(pd.notnull(df), None)
                     records = df.to_dict(orient='records')
