@@ -1,15 +1,15 @@
 # src/processor.py
 import importlib
 import logging
-from typing import List, Dict, Any, Type
+from typing import List, Dict, Any
 import asyncio
 
 from src.registry import (
-    DATASET_CONFIG, 
-    COLLECTION_MODE_IDS, 
+    DATASET_CONFIG,
     get_processor_module_name, 
     get_source_id,
-    get_table_name
+    get_table_name,
+    is_collection_dataset
 )
 import src.db_models as db_models
 
@@ -19,14 +19,14 @@ logger = setup_logger("DataProcessor")
 
 class DataProcessor:
     def __init__(self):
-        self.collection_modes = COLLECTION_MODE_IDS
+        pass
 
-    def get_processor_module(self, dataset_id: str):
-        """Dynamic import of the processor module for a given dataset ID."""
-        module_name = get_processor_module_name(dataset_id)
+    def get_processor_module(self, dataset_key: str):
+        """Dynamic import of the processor module for a given dataset key."""
+        module_name = get_processor_module_name(dataset_key)
         if not module_name:
-            logger.error(f"No processor registered for dataset ID: {dataset_id}")
-            return None
+            # Fallback: if key is already the module name (which it should be now)
+            module_name = dataset_key
         
         try:
             # Assumes modules are in src.datasets package
@@ -35,14 +35,13 @@ class DataProcessor:
             logger.error(f"Failed to import module src.datasets.{module_name}: {e}")
             return None
 
-    async def process_dataset(self, dataset_id: str, raw_data: List[Dict[str, Any]]):
+    async def process_dataset(self, dataset_key: str, raw_data: List[Dict[str, Any]]):
         """
         Main entry point for processing a batch of raw records.
-        Decides whether to use Simple Normalization or Complex Collection logic.
         """
-        logger.info(f"Processing dataset {dataset_id} with {len(raw_data)} records...")
+        logger.info(f"Processing dataset {dataset_key} with {len(raw_data)} records...")
         
-        module = self.get_processor_module(dataset_id)
+        module = self.get_processor_module(dataset_key)
         if not module:
             return []
 
@@ -54,8 +53,8 @@ class DataProcessor:
         ingested_at = datetime.now(timezone.utc).isoformat()
 
         # Standard One-to-One Normalization
-        # We pass the dataset_name (module name) as context to the normalizer
-        dataset_name = get_processor_module_name(dataset_id) or "unknown"
+        # We pass the dataset_key (friendly name) as context to the normalizer
+        dataset_name = dataset_key
 
         if hasattr(module, 'normalize_wide_record'):
             for record in raw_data:
@@ -211,24 +210,24 @@ class DataProcessor:
             dataset_ids = []
             # Resolve the Source ID (Data.gov.sg ID or Collection ID)
             source_id = get_source_id(dataset_key)
+            is_collection = is_collection_dataset(dataset_key)
             
-            # 1. Check if it is a known Collection
-            is_collection = False
-            if source_id in COLLECTION_MODE_IDS:
-                is_collection = True
+            if not source_id:
+                logger.warning(f"Skipping {dataset_key}: No Source ID found.")
+                continue
+
+            # 1. Collection Mode
+            if is_collection:
                 logger.info(f"Fetching collection {source_id} for {dataset_key}")
                 ids = await datagov_client.get_collection_datasets(source_id)
                 if not ids:
                     logger.warning(f"No datasets found for collection {source_id}")
                 dataset_ids.extend(ids)
             
-            # 2. Check if it is a Dataset ID (d_...)
-            elif source_id.startswith("d_"):
-                dataset_ids.append(source_id)
-            
+            # 2. Singular Dataset Mode
             else:
-                logger.warning(f"Skipping {dataset_key}: ID '{source_id}' format unknown.")
-                continue
+                # It's a single dataset ID
+                dataset_ids.append(source_id)
             
             logger.info(f"Found {len(dataset_ids)} datasets for {dataset_key}")
             
@@ -256,6 +255,7 @@ class DataProcessor:
                     
                     # Process (Normalize)
                     try:
+                        # Pass the dataset_key (friendly name) to the processor
                         normalized = await self.process_dataset(dataset_key, records)
                         
                         # Save
