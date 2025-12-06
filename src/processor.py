@@ -4,12 +4,14 @@ import logging
 from typing import List, Dict, Any, Type
 import asyncio
 
-# Usually we would import the DB client here, e.g. from src.database import get_db
-from src.registry import DATASET_REGISTRY, COLLECTION_MODE_IDS
-from src.db_models import (
-    RawHdbResalePrices, RawHdbRentalPrices, RawHdbMedianRent, RawHdbResaleIndex,
-    RawHawkerCentresGeojson
+from src.registry import (
+    DATASET_CONFIG, 
+    COLLECTION_MODE_IDS, 
+    get_processor_module_name, 
+    get_source_id,
+    get_table_name
 )
+import src.db_models as db_models
 
 # Setup Logger
 from src.logger import setup_logger
@@ -17,20 +19,20 @@ logger = setup_logger("DataProcessor")
 
 class DataProcessor:
     def __init__(self):
-        self.registry = DATASET_REGISTRY
         self.collection_modes = COLLECTION_MODE_IDS
 
     def get_processor_module(self, dataset_id: str):
         """Dynamic import of the processor module for a given dataset ID."""
-        module_path = self.registry.get(dataset_id)
-        if not module_path:
+        module_name = get_processor_module_name(dataset_id)
+        if not module_name:
             logger.error(f"No processor registered for dataset ID: {dataset_id}")
             return None
         
         try:
-            return importlib.import_module(f"src.datasets.{module_path}")
+            # Assumes modules are in src.datasets package
+            return importlib.import_module(f"src.datasets.{module_name}")
         except ImportError as e:
-            logger.error(f"Failed to import module src.datasets.{module_path}: {e}")
+            logger.error(f"Failed to import module src.datasets.{module_name}: {e}")
             return None
 
     async def process_dataset(self, dataset_id: str, raw_data: List[Dict[str, Any]]):
@@ -52,17 +54,8 @@ class DataProcessor:
         ingested_at = datetime.now(timezone.utc).isoformat()
 
         # Standard One-to-One Normalization
-        # Resolve readable dataset identifier (name) from registry or generic fallback
-        # Logic: find key where value matches the module name?
-        # Actually simplest is just to use the Key from registry if we had it.
-        # But we only have dataset_id here.
-        # Let's import the REGISTRY and find it.
-        dataset_name = "unknown"
-        for k, v in self.registry.items():
-            if k == dataset_id:
-                # v is "src.datasets.hdb_resale_prices" -> "hdb_resale_prices"
-                dataset_name = v.split('.')[-1]
-                break
+        # We pass the dataset_name (module name) as context to the normalizer
+        dataset_name = get_processor_module_name(dataset_id) or "unknown"
 
         if hasattr(module, 'normalize_wide_record'):
             for record in raw_data:
@@ -100,7 +93,6 @@ class DataProcessor:
 
     async def save_to_d1(self, records: List[Any], dataset_key: str):
         from src.clients.d1 import D1Client
-        from src.registry import get_table_name
         
         table_name = get_table_name(dataset_key)
         if not table_name:
@@ -157,9 +149,7 @@ class DataProcessor:
         Returns a dict: { dataset_id: { original_col: target_col } }
         """
         from src.ai_engine import AIEngine
-        from src.registry import get_table_name
         from src.clients.datagov import datagov_client
-        import src.db_models as db_models
         
         # 1. Resolve Target Model
         table_name = get_table_name(dataset_key)
@@ -168,6 +158,7 @@ class DataProcessor:
             return {}
             
         # Convert table name (e.g. rawHdbResalePrices) to Model Class (RawHdbResalePrices)
+        # This assumes Pydantic models in db_models match the table name (CamelCase)
         model_name = table_name[0].upper() + table_name[1:]
         target_model = getattr(db_models, model_name, None)
         
@@ -209,17 +200,17 @@ class DataProcessor:
     async def kickoff_population(self) -> None:
         """Kick off processing for all datasets."""
         from src.clients.datagov import datagov_client
-        from src.registry import DATASET_SOURCE_IDS, COLLECTION_MODE_IDS
         import pandas as pd
         
         logger.info("Starting D1 population for all datasets")
 
-        for dataset_key in self.registry.keys():
+        # Iterate over all registered datasets in the config
+        for dataset_key in DATASET_CONFIG.keys():
             logger.info(f"Processing {dataset_key}...")
             
             dataset_ids = []
             # Resolve the Source ID (Data.gov.sg ID or Collection ID)
-            source_id = DATASET_SOURCE_IDS.get(dataset_key, dataset_key)
+            source_id = get_source_id(dataset_key)
             
             # 1. Check if it is a known Collection
             is_collection = False
@@ -231,7 +222,7 @@ class DataProcessor:
                     logger.warning(f"No datasets found for collection {source_id}")
                 dataset_ids.extend(ids)
             
-            # 2. Check if it is a Dataset ID
+            # 2. Check if it is a Dataset ID (d_...)
             elif source_id.startswith("d_"):
                 dataset_ids.append(source_id)
             
@@ -281,4 +272,3 @@ class DataProcessor:
 
 # Initialize Singleton
 processor = DataProcessor()
-
